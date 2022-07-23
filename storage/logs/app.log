@@ -1,0 +1,29 @@
+2022/07/23 15:48:27 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658562507883630000}
+2022/07/23 15:55:16 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658562916300724000}
+2022/07/23 16:08:59 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658563739751919000}
+2022/07/23 16:13:38 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658564018965302000}
+2022/07/23 16:27:43 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658564863164700000}
+2022/07/23 16:28:58 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"error","message":"app.BindAndValid errs: State必须是[0 1]中的一个","time":1658564938036393000}
+2022/07/23 16:47:44 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658566064194936000}
+2022/07/23 16:48:44 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"error","message":"app.BindAndValid errs: Name为必填字段,CreatedBy为必填字段","time":1658566124857738000}
+2022/07/23 16:49:11 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"error","message":"app.BindAndValid errs: Name为必填字段,CreatedBy为必填字段","time":1658566151345624000}
+2022/07/23 16:49:30 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"error","message":"app.BindAndValid errs: Name为必填字段,CreatedBy为必填字段","time":1658566170982004000}
+2022/07/23 16:49:59 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"error","message":"app.BindAndValid errs: CreatedBy为必填字段","time":1658566199288471000}
+2022/07/23 16:53:20 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"error","message":"app.BindAndValid errs: ModifiedBy为必填字段","time":1658566400245830000}
+2022/07/23 16:57:52 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658566672652069000}
+2022/07/23 17:19:28 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658567968523491000}
+2022/07/23 17:19:33 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658567973411672000}
+2022/07/23 17:25:25 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658568325582310000}
+2022/07/23 17:26:01 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658568361866920000}
+2022/07/23 17:26:21 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658568381425451000}
+2022/07/23 17:27:27 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658568447865414000}
+2022/07/23 17:33:18 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658568798076498000}
+2022/07/23 17:33:29 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658568809170005000}
+2022/07/23 17:34:22 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658568862467331000}
+2022/07/23 17:34:35 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658568875361503000}
+2022/07/23 17:51:21 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658569881463774000}
+2022/07/23 17:52:11 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"error","message":"svc.CheckAuth err: auth info does not exist.","time":1658569931317131000}
+2022/07/23 17:55:15 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658570115947038000}
+2022/07/23 18:02:42 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658570562821910000}
+2022/07/23 18:03:36 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"eddycjy: go-programming-tour-book/blog-service","time":1658570616296557000}
+2022/07/23 18:03:38 {"callers":["/Users/zyd/Documents/code/go/xigua-blog/main.go: 28 main.init.0"],"level":"info","message":"access log: method: GET, status_code: 200, begin_time: 1658570618, end_time: 1658570618","request":"","response":"{\"list\":[],\"pager\":{\"page\":1,\"page_size\":10,\"total_rows\":0}}","time":1658570618985665000}
