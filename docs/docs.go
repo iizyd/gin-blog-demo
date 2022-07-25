@@ -21,6 +21,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "文章标签"
+                ],
                 "summary": "获取多个标签",
                 "parameters": [
                     {
@@ -78,6 +81,9 @@ const docTemplate = `{
             "post": {
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "文章标签"
                 ],
                 "summary": "新增标签",
                 "parameters": [
@@ -143,6 +149,9 @@ const docTemplate = `{
             "put": {
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "文章标签"
                 ],
                 "summary": "更新标签",
                 "parameters": [
@@ -216,6 +225,9 @@ const docTemplate = `{
                 "produces": [
                     "application/json"
                 ],
+                "tags": [
+                    "文章标签"
+                ],
                 "summary": "删除标签",
                 "parameters": [
                     {
@@ -250,20 +262,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "app.Pager": {
-            "type": "object",
-            "properties": {
-                "page": {
-                    "type": "integer"
-                },
-                "page_size": {
-                    "type": "integer"
-                },
-                "total_rows": {
-                    "type": "integer"
-                }
-            }
-        },
         "errcode.Error": {
             "type": "object"
         },
@@ -308,8 +306,14 @@ const docTemplate = `{
                         "$ref": "#/definitions/model.Tag"
                     }
                 },
-                "pager": {
-                    "$ref": "#/definitions/app.Pager"
+                "page": {
+                    "type": "integer"
+                },
+                "page_size": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
                 }
             }
         }
@@ -319,8 +323,8 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "",
-	BasePath:         "",
+	Host:             "localhost:8000",
+	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "博客系统",
 	Description:      "博客 API 接口",

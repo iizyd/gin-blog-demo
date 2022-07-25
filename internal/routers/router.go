@@ -32,7 +32,7 @@ func NewRouter() *gin.Engine {
 	r.POST("/auth", api.GetAuth)
 
 	apiv1 := r.Group("/api/v1")
-	apiv1.Use(middleware.JWT())
+	// apiv1.Use(middleware.JWT())
 	apiv1.Use(middleware.AccessLog())
 	{
 		apiv1.POST("/tags", tag.Create)

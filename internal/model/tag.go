@@ -12,8 +12,8 @@ type Tag struct {
 }
 
 type TagSwagger struct {
-	List  []*Tag
-	Pager *app.Pager
+	List []*Tag
+	*app.Pager
 }
 
 func (t Tag) TableName() string {

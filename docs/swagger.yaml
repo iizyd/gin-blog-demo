@@ -1,13 +1,5 @@
+basePath: /api/v1
 definitions:
-  app.Pager:
-    properties:
-      page:
-        type: integer
-      page_size:
-        type: integer
-      total_rows:
-        type: integer
-    type: object
   errcode.Error:
     type: object
   model.Tag:
@@ -37,9 +29,14 @@ definitions:
         items:
           $ref: '#/definitions/model.Tag'
         type: array
-      pager:
-        $ref: '#/definitions/app.Pager'
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
     type: object
+host: localhost:8000
 info:
   contact: {}
   description: 博客 API 接口
@@ -86,6 +83,8 @@ paths:
           schema:
             $ref: '#/definitions/errcode.Error'
       summary: 获取多个标签
+      tags:
+      - 文章标签
     post:
       parameters:
       - description: 标签名称
@@ -129,6 +128,8 @@ paths:
           schema:
             $ref: '#/definitions/errcode.Error'
       summary: 新增标签
+      tags:
+      - 文章标签
   /api/v1/tags/{id}:
     delete:
       parameters:
@@ -153,6 +154,8 @@ paths:
           schema:
             $ref: '#/definitions/errcode.Error'
       summary: 删除标签
+      tags:
+      - 文章标签
     put:
       parameters:
       - description: 标签 ID
@@ -202,4 +205,6 @@ paths:
           schema:
             $ref: '#/definitions/errcode.Error'
       summary: 更新标签
+      tags:
+      - 文章标签
 swagger: "2.0"

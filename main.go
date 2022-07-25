@@ -34,6 +34,9 @@ func init() {
 // @title 博客系统
 // @version 1.0
 // @description 博客 API 接口
+
+// @host      localhost:8000
+// @BasePath  /api/v1
 func main() {
 	gin.SetMode(global.ServerSetting.RunMode)
 	router := routers.NewRouter()

@@ -19,6 +19,7 @@ func (t Tag) Get(c *gin.Context) {}
 
 // @Summary 获取多个标签
 // @Produce  json
+// @Tags 文章标签
 // @Param name query string false "标签名称" maxlength(100)
 // @Param state query int false "状态" Enums(0, 1) default(1)
 // @Param page query int false "页码"
@@ -31,7 +32,8 @@ func (t Tag) List(c *gin.Context) {
 	param := service.TagListRequest{}
 	response := app.NewResponse(c)
 	valid, errs := app.BindAndValid(c, &param)
-	if !valid {
+
+	if !valid { // 校验错误时
 		global.Logger.Errorf("app.BindAndValid errs: %v", errs)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errs.Errors()...))
 		return
@@ -39,6 +41,7 @@ func (t Tag) List(c *gin.Context) {
 
 	svc := service.New(c.Request.Context())
 	pager := app.Pager{Page: app.GetPage(c), PageSize: app.GetPageSize(c)}
+
 	totalRows, err := svc.CountTag(&service.CountTagRequest{Name: param.Name, State: param.State})
 	if err != nil {
 		global.Logger.Errorf("svc.CountTag err: %v", err)
@@ -59,6 +62,7 @@ func (t Tag) List(c *gin.Context) {
 
 // @Summary 新增标签
 // @Produce  json
+// @Tags 文章标签
 // @Param name body string true "标签名称" minlength(3) maxlength(100)
 // @Param state body int false "状态" Enums(0, 1) default(1)
 // @Param created_by body string true "创建者" minlength(3) maxlength(100)
@@ -90,6 +94,7 @@ func (t Tag) Create(c *gin.Context) {
 
 // @Summary 更新标签
 // @Produce  json
+// @Tags 文章标签
 // @Param id path int true "标签 ID"
 // @Param name body string false "标签名称" minlength(3) maxlength(100)
 // @Param state body int false "状态" Enums(0, 1) default(1)
@@ -122,6 +127,7 @@ func (t Tag) Update(c *gin.Context) {
 
 // @Summary 删除标签
 // @Produce  json
+// @Tags 文章标签
 // @Param id path int true "标签 ID"
 // @Success 200 {string} string "成功"
 // @Failure 400 {object} errcode.Error "请求错误"
