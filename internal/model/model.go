@@ -5,19 +5,20 @@ import (
 	"time"
 
 	"github.com/iamzhiyudong/xigua-blog/global"
+	"github.com/iamzhiyudong/xigua-blog/pkg/app"
 	"github.com/iamzhiyudong/xigua-blog/pkg/setting"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 type Model struct {
-	ID         uint32 `gorm:"primary_key" json:"id"`
-	CreatedBy  string `json:"created_by"`
-	ModifiedBy string `json:"modified_by"`
-	CreatedOn  uint32 `json:"created_on"`
-	ModifiedOn uint32 `json:"modified_on"`
-	DeletedOn  uint32 `json:"deleted_on"`
-	IsDel      uint8  `json:"is_del"`
+	ID         uint32         `gorm:"primary_key" json:"id"`
+	CreatedBy  string         `json:"created_by"`
+	ModifiedBy string         `json:"modified_by"`
+	CreatedOn  *app.LocalTime `json:"created_on"`
+	ModifiedOn *app.LocalTime `json:"modified_on"`
+	DeletedOn  *app.LocalTime `json:"deleted_on"`
+	IsDel      uint8          `json:"is_del"`
 }
 
 func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
