@@ -1,6 +1,9 @@
 package model
 
-import "github.com/iamzhiyudong/xigua-blog/pkg/app"
+import (
+	"github.com/iamzhiyudong/xigua-blog/pkg/app"
+	"github.com/jinzhu/gorm"
+)
 
 type Article struct {
 	*Model
@@ -8,7 +11,7 @@ type Article struct {
 	Desc          string `json:"desc"`
 	Content       string `json:"content"`
 	CoverImageUrl string `json:"cover_image_url"`
-	State         uint8  `json:"state"`
+	State         int    `json:"state"`
 }
 
 type ArticleSwagger struct {
@@ -18,4 +21,64 @@ type ArticleSwagger struct {
 
 func (a Article) TableName() string {
 	return "blog_article"
+}
+
+func (a Article) Create(db *gorm.DB) error {
+	return db.Create(&a).Error
+}
+
+func (a Article) List(db *gorm.DB, pageOffset, pageSize int) ([]*Article, error) {
+	var articles []*Article
+	var err error
+
+	if pageOffset >= 0 && pageSize > 0 {
+		db = db.Offset(pageOffset).Limit(pageSize)
+	}
+
+	// db = db.Where("'title' LIKE ? AND 'desc' LIKE ? AND 'content' LIKE ?", "%"+a.Title+"%", "%"+a.Desc+"%", "%"+a.Content+"%")
+	if a.Title != "" {
+		db = db.Where("'title' LIKE ?", "%"+a.Title+"%")
+	}
+	if a.Desc != "" {
+		db = db.Where("'desc' LIKE ?", "%"+a.Desc+"%")
+	}
+	if a.Content != "" {
+		db = db.Where("'content' LIKE ?", "%"+a.Content+"%")
+	}
+
+	if a.State != -1 {
+		db = db.Where("state = ?", a.State)
+	}
+
+	if err = db.Where("is_del = ?", 0).Find(&articles).Error; err != nil {
+		return nil, err
+	}
+
+	return articles, nil
+}
+
+func (a Article) Count(db *gorm.DB) (int, error) {
+	var count int
+
+	// db = db.Where("'title' LIKE ? AND 'desc' LIKE ? AND 'content' LIKE ?", "%"+a.Title+"%", "%"+a.Desc+"%", "%"+a.Content+"%")
+
+	if a.Title != "" {
+		db = db.Where("'title' LIKE ?", "%"+a.Title+"%")
+	}
+	if a.Desc != "" {
+		db = db.Where("'desc' LIKE ?", "%"+a.Desc+"%")
+	}
+	if a.Content != "" {
+		db = db.Where("'content' LIKE ?", "%"+a.Content+"%")
+	}
+
+	if a.State != -1 {
+		db = db.Where("'state' = ?", a.State)
+	}
+
+	if err := db.Model(&a).Where("'is_del' = ?", 0).Count(&count).Error; err != nil {
+		return 0, err
+	}
+
+	return count, nil
 }

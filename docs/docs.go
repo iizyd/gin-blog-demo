@@ -262,20 +262,43 @@ const docTemplate = `{
         }
     },
     "definitions": {
+        "app.Pager": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer"
+                },
+                "page_size": {
+                    "type": "integer"
+                },
+                "total": {
+                    "type": "integer"
+                }
+            }
+        },
         "errcode.Error": {
             "type": "object"
         },
-        "model.Tag": {
+        "model.Article": {
             "type": "object",
             "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "cover_image_url": {
+                    "type": "string"
+                },
                 "created_by": {
                     "type": "string"
                 },
                 "created_on": {
-                    "type": "integer"
+                    "type": "string"
                 },
                 "deleted_on": {
-                    "type": "integer"
+                    "type": "string"
+                },
+                "desc": {
+                    "type": "string"
                 },
                 "id": {
                     "type": "integer"
@@ -287,7 +310,53 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "modified_on": {
+                    "type": "string"
+                },
+                "state": {
                     "type": "integer"
+                },
+                "title": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.ArticleSwagger": {
+            "type": "object",
+            "properties": {
+                "list": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Article"
+                    }
+                },
+                "pager": {
+                    "$ref": "#/definitions/app.Pager"
+                }
+            }
+        },
+        "model.Tag": {
+            "type": "object",
+            "properties": {
+                "created_by": {
+                    "type": "string"
+                },
+                "created_on": {
+                    "type": "string"
+                },
+                "deleted_on": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_del": {
+                    "type": "integer"
+                },
+                "modified_by": {
+                    "type": "string"
+                },
+                "modified_on": {
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"

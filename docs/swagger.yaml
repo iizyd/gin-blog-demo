@@ -1,15 +1,30 @@
 basePath: /api/v1
 definitions:
+  app.Pager:
+    properties:
+      page:
+        type: integer
+      page_size:
+        type: integer
+      total:
+        type: integer
+    type: object
   errcode.Error:
     type: object
-  model.Tag:
+  model.Article:
     properties:
+      content:
+        type: string
+      cover_image_url:
+        type: string
       created_by:
         type: string
       created_on:
-        type: integer
+        type: string
       deleted_on:
-        type: integer
+        type: string
+      desc:
+        type: string
       id:
         type: integer
       is_del:
@@ -17,7 +32,37 @@ definitions:
       modified_by:
         type: string
       modified_on:
+        type: string
+      state:
         type: integer
+      title:
+        type: string
+    type: object
+  model.ArticleSwagger:
+    properties:
+      list:
+        items:
+          $ref: '#/definitions/model.Article'
+        type: array
+      pager:
+        $ref: '#/definitions/app.Pager'
+    type: object
+  model.Tag:
+    properties:
+      created_by:
+        type: string
+      created_on:
+        type: string
+      deleted_on:
+        type: string
+      id:
+        type: integer
+      is_del:
+        type: integer
+      modified_by:
+        type: string
+      modified_on:
+        type: string
       name:
         type: string
       state:
