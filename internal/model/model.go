@@ -51,7 +51,7 @@ func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {
 
 func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 	if !scope.HasError() {
-		nowTime := time.Now().Unix()
+		nowTime := time.Now()
 		if createTimeField, ok := scope.FieldByName("CreatedOn"); ok {
 			if createTimeField.IsBlank {
 				_ = createTimeField.Set(nowTime)
@@ -68,7 +68,7 @@ func updateTimeStampForCreateCallback(scope *gorm.Scope) {
 
 func updateTimeStampForUpdateCallback(scope *gorm.Scope) {
 	if _, ok := scope.Get("gorm:update_column"); !ok {
-		_ = scope.SetColumn("ModifiedOn", time.Now().Unix())
+		_ = scope.SetColumn("ModifiedOn", time.Now())
 	}
 }
 
@@ -82,7 +82,7 @@ func deleteCallback(scope *gorm.Scope) {
 		deletedOnField, hasDeletedOnField := scope.FieldByName("DeletedOn")
 		isDelField, hasIsDelField := scope.FieldByName("IsDel")
 		if !scope.Search.Unscoped && hasDeletedOnField && hasIsDelField {
-			now := time.Now().Unix()
+			now := time.Now()
 			scope.Raw(fmt.Sprintf(
 				"UPDATE %v SET %v=%v,%v=%v%v%v",
 				scope.QuotedTableName(),

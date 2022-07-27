@@ -27,10 +27,8 @@ func NewResponse(ctx *gin.Context) *Response {
 }
 
 func (r *Response) ToResponse(data interface{}) {
-	if data == nil {
-		data = gin.H{"code": errcode.Success.Code(), "msg": errcode.Success.Msg(), "data": nil}
-	}
-	r.Ctx.JSON(http.StatusOK, data)
+	res_body := gin.H{"code": errcode.Success.Code(), "msg": errcode.Success.Msg(), "data": data}
+	r.Ctx.JSON(http.StatusOK, res_body)
 }
 
 func (r *Response) ToResponseList(list interface{}, totalRows int) {
