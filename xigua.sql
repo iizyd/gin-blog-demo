@@ -13,7 +13,7 @@ CREATE TABLE `blog_tag` (
   `created_by` varchar(100) DEFAULT '' COMMENT '创建人',
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `modified_by` varchar(100) DEFAULT '' COMMENT '修改人',
-  `deleted_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '删除时间',
+  `deleted_on` datetime DEFAULT NULL COMMENT '删除时间',
   `is_del` tinyint(3) unsigned DEFAULT '0' COMMENT '是否删除 0 为未删除、1 为已删除',
 
   `state` tinyint(3) unsigned DEFAULT '1' COMMENT '状态 0 为禁用、1 为启用',
@@ -33,7 +33,7 @@ CREATE TABLE `blog_article` (
   `created_by` varchar(100) DEFAULT '' COMMENT '创建人',
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `modified_by` varchar(100) DEFAULT '' COMMENT '修改人',
-  `deleted_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '删除时间',
+  `deleted_on` datetime DEFAULT NULL COMMENT '删除时间',
   `is_del` tinyint(3) unsigned DEFAULT '0' COMMENT '是否删除 0 为未删除、1 为已删除',
 
   `state` tinyint(3) unsigned DEFAULT '1' COMMENT '状态 0 为禁用、1 为启用',
@@ -51,7 +51,7 @@ CREATE TABLE `blog_article_tag` (
   `created_by` varchar(100) DEFAULT '' COMMENT '创建人',
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `modified_by` varchar(100) DEFAULT '' COMMENT '修改人',
-  `deleted_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '删除时间',
+  `deleted_on` datetime DEFAULT NULL COMMENT '删除时间',
   `is_del` tinyint(3) unsigned DEFAULT '0' COMMENT '是否删除 0 为未删除、1 为已删除',
   
   PRIMARY KEY (`id`)
@@ -67,7 +67,7 @@ CREATE TABLE `blog_auth` (
   `created_by` varchar(100) DEFAULT '' COMMENT '创建人',
   `modified_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   `modified_by` varchar(100) DEFAULT '' COMMENT '修改人',
-  `deleted_on` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '删除时间',
+  `deleted_on` datetime DEFAULT NULL COMMENT '删除时间',
   `is_del` tinyint(3) unsigned DEFAULT '0' COMMENT '是否删除 0 为未删除、1 为已删除',
 
   PRIMARY KEY (`id`) USING BTREE
