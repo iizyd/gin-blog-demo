@@ -31,11 +31,13 @@ func (d *Dao) UpdateTag(id uint32, name string, state int8, modifiedBy string) e
 		Model: &model.Model{ID: id},
 	}
 	values := map[string]interface{}{
-		"state":       state,
 		"modified_by": modifiedBy,
 	}
 	if name != "" {
 		values["name"] = name
+	}
+	if state != -1 {
+		values["state"] = state
 	}
 
 	return tag.Update(d.engine, values)

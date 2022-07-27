@@ -24,8 +24,8 @@ type CreateTagRequest struct {
 type UpdateTagRequest struct {
 	ID         uint32 `form:"id" binding:"required,gte=1"`
 	Name       string `form:"name" binding:"max=100"`
-	State      int8   `form:"state" binding:"oneof=-1 0 1"`
-	ModifiedBy string `form:"modified_by" binding:"omitempty,required,min=2,max=100"`
+	State      int8   `form:"state,default=-1" binding:"omitempty,oneof=-1 0 1"`
+	ModifiedBy string `json:"modified_by" form:"modified_by" binding:"required,min=2,max=100"`
 }
 
 type DeleteTagRequest struct {
