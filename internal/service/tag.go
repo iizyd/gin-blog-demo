@@ -12,7 +12,7 @@ type CountTagRequest struct {
 
 type TagListRequest struct {
 	Name  string `form:"name" binding:"max=100"`
-	State int8   `form:"state" binding:"omitempty,oneof=-1 0 1"`
+	State int8   `form:"state,default=-1" binding:"omitempty,oneof=-1 0 1"`
 }
 
 type CreateTagRequest struct {
