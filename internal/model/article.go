@@ -35,15 +35,14 @@ func (a Article) List(db *gorm.DB, pageOffset, pageSize int) ([]*Article, error)
 		db = db.Offset(pageOffset).Limit(pageSize)
 	}
 
-	// db = db.Where("'title' LIKE ? AND 'desc' LIKE ? AND 'content' LIKE ?", "%"+a.Title+"%", "%"+a.Desc+"%", "%"+a.Content+"%")
 	if a.Title != "" {
-		db = db.Where("'title' LIKE ?", "%"+a.Title+"%")
+		db = db.Where("`title` LIKE ?", "%"+a.Title+"%")
 	}
 	if a.Desc != "" {
-		db = db.Where("'desc' LIKE ?", "%"+a.Desc+"%")
+		db = db.Where("`desc` LIKE ?", "%"+a.Desc+"%")
 	}
 	if a.Content != "" {
-		db = db.Where("'content' LIKE ?", "%"+a.Content+"%")
+		db = db.Where("`content` LIKE ?", "%"+a.Content+"%")
 	}
 
 	if a.State != -1 {
@@ -60,16 +59,14 @@ func (a Article) List(db *gorm.DB, pageOffset, pageSize int) ([]*Article, error)
 func (a Article) Count(db *gorm.DB) (int, error) {
 	var count int
 
-	// db = db.Where("'title' LIKE ? AND 'desc' LIKE ? AND 'content' LIKE ?", "%"+a.Title+"%", "%"+a.Desc+"%", "%"+a.Content+"%")
-
 	if a.Title != "" {
-		db = db.Where("'title' LIKE ?", "%"+a.Title+"%")
+		db = db.Where("`title` LIKE ?", "%"+a.Title+"%")
 	}
 	if a.Desc != "" {
-		db = db.Where("'desc' LIKE ?", "%"+a.Desc+"%")
+		db = db.Where("`desc` LIKE ?", "%"+a.Desc+"%")
 	}
 	if a.Content != "" {
-		db = db.Where("'content' LIKE ?", "%"+a.Content+"%")
+		db = db.Where("`content` LIKE ?", "%"+a.Content+"%")
 	}
 
 	if a.State != -1 {
