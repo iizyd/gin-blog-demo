@@ -44,6 +44,10 @@ type UpdateArticleRequest struct {
 	State         int    `json:"state" form:"state" binding:"omitempty,oneof=0 1"`
 }
 
+type DeleteArticleRequest struct {
+	ID int `json:"id" form:"id" binding:"gt=0"`
+}
+
 func (s *Service) CreateArticle(param *CreateArticleRequest) error {
 	return s.dao.CreateArticle(param.Title, param.Desc, param.CoverImageUrl, param.Content, param.CreatedBy, param.State)
 }
@@ -62,4 +66,8 @@ func (s *Service) GetArticle(param *GetArticleRequest) ([]*model.Article, error)
 
 func (s *Service) UpdateArticle(param *UpdateArticleRequest) error {
 	return s.dao.UpdateArticle(param.ID, param.Title, param.Desc, param.CoverImageUrl, param.Content, param.ModifiedBy, param.State)
+}
+
+func (s *Service) DeleteArticle(param *DeleteArticleRequest) error {
+	return s.dao.DeleteArticle(param.ID)
 }

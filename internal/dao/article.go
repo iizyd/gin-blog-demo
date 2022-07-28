@@ -81,3 +81,11 @@ func (dao *Dao) UpdateArticle(id int, title, desc, cover_image_url, content, mod
 
 	return article.Update(dao.engine, values)
 }
+
+func (dao *Dao) DeleteArticle(id int) error {
+	article := model.Article{
+		Model: &model.Model{ID: id},
+	}
+
+	return article.Delete(dao.engine)
+}

@@ -83,7 +83,7 @@ func (a Article) Count(db *gorm.DB) (int, error) {
 func (a Article) Get(db *gorm.DB) ([]*Article, error) {
 	var article []*Article
 
-	if err := db.Where("`id` = ?", a.ID).First(&article).Error; err != nil {
+	if err := db.Where("`id` = ? AND is_del = ?", a.ID, 0).First(&article).Error; err != nil {
 		return nil, err
 	}
 
@@ -92,6 +92,13 @@ func (a Article) Get(db *gorm.DB) ([]*Article, error) {
 
 func (a Article) Update(db *gorm.DB, values any) error {
 	if err := db.Model(a).Where("id = ? AND is_del = ?", a.ID, 0).Updates(values).Error; err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a Article) Delete(db *gorm.DB) error {
+	if err := db.Where("id = ? AND is_del = ?", a.ID, 0).Delete(&a).Error; err != nil {
 		return err
 	}
 	return nil

@@ -1,8 +1,6 @@
 package v1
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/iamzhiyudong/xigua-blog/global"
 	"github.com/iamzhiyudong/xigua-blog/internal/service"
@@ -20,8 +18,6 @@ func NewArticle() Article {
 func (a Article) Get(c *gin.Context) {
 	params := service.GetArticleRequest{ID: convert.StrTo(c.Param("id")).MustInt()}
 	response := app.NewResponse(c)
-
-	fmt.Printf(">>>id: %v", params)
 
 	valid, errs := app.BindAndValid(c, &params)
 	if !valid {
@@ -149,4 +145,23 @@ func (a Article) Update(c *gin.Context) {
 	response.ToResponse(gin.H{})
 }
 
-func (a Article) Delete(c *gin.Context) {}
+func (a Article) Delete(c *gin.Context) {
+	params := service.DeleteArticleRequest{ID: convert.StrTo(c.Param("id")).MustInt()}
+	response := app.NewResponse(c)
+
+	valid, errs := app.BindAndValid(c, &params)
+	if !valid {
+		global.Logger.Errorf("app.BindAndValid errs: %v", errs)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errs.Errors()...))
+		return
+	}
+
+	svc := service.New(c.Request.Context())
+	if err := svc.DeleteArticle(&params); err != nil {
+		global.Logger.Errorf("svc.DeleteArticle err: %v", err)
+		response.ToErrorResponse(errcode.ErrorDeleteArticleFail)
+		return
+	}
+
+	response.ToResponse(gin.H{})
+}
