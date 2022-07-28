@@ -15,16 +15,16 @@ type CreateArticleRequest struct {
 }
 
 type ListArticleRequest struct {
-	Title   string `form:"title" binding:"min=1,max=100"`
-	Desc    string `form:"desc" binding:"min=0,max=100"`
+	Title   string `form:"title" binding:"omitempty,min=1,max=100"`
+	Desc    string `form:"desc" binding:"omitempty,min=0,max=100"`
 	Content string `form:"content" binding:"-"`
 
 	State int `form:"state,default=-1" binding:"omitempty,oneof=-1 0 1"`
 }
 
 type CountArticleRequest struct {
-	Title   string `form:"title" binding:"min=1,max=100"`
-	Desc    string `form:"desc" binding:"min=0,max=100"`
+	Title   string `form:"title" binding:"omitempty,min=1,max=100"`
+	Desc    string `form:"desc" binding:"omitempty,min=0,max=100"`
 	Content string `form:"content" binding:"-"`
 
 	State int `form:"state,default=-1" binding:"omitempty,oneof=-1 0 1"`

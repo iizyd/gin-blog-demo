@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/gin-gonic/gin"
@@ -43,6 +44,8 @@ func BindAndValid(c *gin.Context, v interface{}) (bool, ValidErrors) {
 		if !ok {
 			return false, errs
 		}
+
+		fmt.Printf(">>> trans err: %v", verrs)
 
 		for key, value := range verrs.Translate(trans) { // 遍历翻译之后的错误信息
 			errs = append(errs, &ValidError{
