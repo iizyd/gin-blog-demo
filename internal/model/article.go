@@ -1,8 +1,6 @@
 package model
 
 import (
-	"fmt"
-
 	"github.com/iamzhiyudong/xigua-blog/pkg/app"
 	"github.com/jinzhu/gorm"
 )
@@ -84,10 +82,17 @@ func (a Article) Count(db *gorm.DB) (int, error) {
 
 func (a Article) Get(db *gorm.DB) ([]*Article, error) {
 	var article []*Article
-	fmt.Printf(">>>id: %v", a.ID)
+
 	if err := db.Where("`id` = ?", a.ID).First(&article).Error; err != nil {
 		return nil, err
 	}
 
 	return article, nil
+}
+
+func (a Article) Update(db *gorm.DB, values any) error {
+	if err := db.Model(a).Where("id = ? AND is_del = ?", a.ID, 0).Updates(values).Error; err != nil {
+		return err
+	}
+	return nil
 }

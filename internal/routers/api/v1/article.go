@@ -126,5 +126,27 @@ func (a Article) Create(c *gin.Context) {
 
 	response.ToResponse(gin.H{})
 }
-func (a Article) Update(c *gin.Context) {}
+
+func (a Article) Update(c *gin.Context) {
+	params := service.UpdateArticleRequest{ID: convert.StrTo(c.Param("id")).MustInt()}
+	response := app.NewResponse(c)
+
+	valid, errs := app.BindAndValid(c, &params)
+	if !valid {
+		global.Logger.Errorf("app.BindAndValid errs: %v", errs)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errs.Errors()...))
+		return
+	}
+
+	svc := service.New(c.Request.Context())
+	err := svc.UpdateArticle(&params)
+	if err != nil {
+		global.Logger.Errorf("svc.UpdateArticle err: %v", err)
+		response.ToErrorResponse(errcode.ErrorUpdateArticleFail)
+		return
+	}
+
+	response.ToResponse(gin.H{})
+}
+
 func (a Article) Delete(c *gin.Context) {}

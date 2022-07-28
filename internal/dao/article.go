@@ -48,3 +48,36 @@ func (dao *Dao) GetArticle(id int) ([]*model.Article, error) {
 
 	return article.Get(dao.engine)
 }
+
+func (dao *Dao) UpdateArticle(id int, title, desc, cover_image_url, content, modified_by string, state int) error {
+	article := model.Article{
+		Model: &model.Model{
+			ID:         id,
+			ModifiedBy: modified_by,
+		},
+		Title:         title,
+		Desc:          desc,
+		CoverImageUrl: cover_image_url,
+		Content:       content,
+		State:         state,
+	}
+
+	values := map[string]interface{}{
+		"modified_by":     modified_by,
+		"cover_image_url": cover_image_url,
+	}
+	if title != "" {
+		values["title"] = title
+	}
+	if desc != "" {
+		values["desc"] = desc
+	}
+	if content != "" {
+		values["content"] = content
+	}
+	if state != -1 {
+		values["state"] = state
+	}
+
+	return article.Update(dao.engine, values)
+}

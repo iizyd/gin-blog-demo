@@ -34,6 +34,16 @@ type GetArticleRequest struct {
 	ID int `json:"id" form:"id" binding:"gt=0"`
 }
 
+type UpdateArticleRequest struct {
+	ID            int    `json:"id" form:"id" binding:"gt=0"`
+	Title         string `json:"title" form:"title" binding:"omitempty,min=1,max=100"`
+	Desc          string `json:"desc" form:"desc" binding:"omitempty,min=0,max=100"`
+	CoverImageUrl string `json:"cover_image_url" form:"cover_image_url" binding:"omitempty,min=0,max=100"`
+	Content       string `json:"content" form:"content" binding:"-"`
+	ModifiedBy    string `json:"modified_by" form:"modified_by" binding:"required,min=2,max=100"`
+	State         int    `json:"state" form:"state" binding:"omitempty,oneof=0 1"`
+}
+
 func (s *Service) CreateArticle(param *CreateArticleRequest) error {
 	return s.dao.CreateArticle(param.Title, param.Desc, param.CoverImageUrl, param.Content, param.CreatedBy, param.State)
 }
@@ -48,4 +58,8 @@ func (s *Service) CountArticle(param *CountArticleRequest) (int, error) {
 
 func (s *Service) GetArticle(param *GetArticleRequest) ([]*model.Article, error) {
 	return s.dao.GetArticle(param.ID)
+}
+
+func (s *Service) UpdateArticle(param *UpdateArticleRequest) error {
+	return s.dao.UpdateArticle(param.ID, param.Title, param.Desc, param.CoverImageUrl, param.Content, param.ModifiedBy, param.State)
 }
