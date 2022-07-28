@@ -30,6 +30,10 @@ type CountArticleRequest struct {
 	State int `form:"state,default=-1" binding:"omitempty,oneof=-1 0 1"`
 }
 
+type GetArticleRequest struct {
+	ID int `json:"id" form:"id" binding:"gt=0"`
+}
+
 func (s *Service) CreateArticle(param *CreateArticleRequest) error {
 	return s.dao.CreateArticle(param.Title, param.Desc, param.CoverImageUrl, param.Content, param.CreatedBy, param.State)
 }
@@ -40,4 +44,8 @@ func (s *Service) ListArticle(param *ListArticleRequest, pager *app.Pager) ([]*m
 
 func (s *Service) CountArticle(param *CountArticleRequest) (int, error) {
 	return s.dao.CountArticle(param.Title, param.Desc, param.Content, param.State)
+}
+
+func (s *Service) GetArticle(param *GetArticleRequest) ([]*model.Article, error) {
+	return s.dao.GetArticle(param.ID)
 }

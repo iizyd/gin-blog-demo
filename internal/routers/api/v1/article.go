@@ -1,10 +1,13 @@
 package v1
 
 import (
+	"fmt"
+
 	"github.com/gin-gonic/gin"
 	"github.com/iamzhiyudong/xigua-blog/global"
 	"github.com/iamzhiyudong/xigua-blog/internal/service"
 	"github.com/iamzhiyudong/xigua-blog/pkg/app"
+	"github.com/iamzhiyudong/xigua-blog/pkg/convert"
 	"github.com/iamzhiyudong/xigua-blog/pkg/errcode"
 )
 
@@ -15,7 +18,28 @@ func NewArticle() Article {
 }
 
 func (a Article) Get(c *gin.Context) {
-	app.NewResponse(c).ToErrorResponse(errcode.ServerError)
+	params := service.GetArticleRequest{ID: convert.StrTo(c.Param("id")).MustInt()}
+	response := app.NewResponse(c)
+
+	fmt.Printf(">>>id: %v", params)
+
+	valid, errs := app.BindAndValid(c, &params)
+	if !valid {
+		global.Logger.Errorf("app.BindAndValid errs: %v", errs)
+		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errs.Errors()...))
+		return
+	}
+
+	svc := service.New(c.Request.Context())
+
+	article, err := svc.GetArticle(&params)
+	if err != nil {
+		global.Logger.Errorf("svc.GetArticle err: %v", err)
+		response.ToErrorResponse(errcode.ErrorGetArticleListFail)
+		return
+	}
+
+	response.ToResponse(article)
 }
 
 // @Summary 获取文章列表

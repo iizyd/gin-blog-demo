@@ -1,6 +1,8 @@
 package model
 
 import (
+	"fmt"
+
 	"github.com/iamzhiyudong/xigua-blog/pkg/app"
 	"github.com/jinzhu/gorm"
 )
@@ -78,4 +80,14 @@ func (a Article) Count(db *gorm.DB) (int, error) {
 	}
 
 	return count, nil
+}
+
+func (a Article) Get(db *gorm.DB) ([]*Article, error) {
+	var article []*Article
+	fmt.Printf(">>>id: %v", a.ID)
+	if err := db.Where("`id` = ?", a.ID).First(&article).Error; err != nil {
+		return nil, err
+	}
+
+	return article, nil
 }

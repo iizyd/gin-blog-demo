@@ -12,13 +12,13 @@ import (
 )
 
 type Model struct {
-	ID         uint32         `gorm:"primary_key" json:"id"`
+	ID         int            `gorm:"primary_key" json:"id"`
 	CreatedBy  string         `json:"created_by"`
 	ModifiedBy string         `json:"modified_by"`
 	CreatedOn  *app.LocalTime `json:"created_on"`
 	ModifiedOn *app.LocalTime `json:"modified_on"`
 	DeletedOn  *app.LocalTime `json:"deleted_on"`
-	IsDel      uint8          `json:"is_del"`
+	IsDel      int            `json:"is_del"`
 }
 
 func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {

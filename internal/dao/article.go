@@ -42,3 +42,9 @@ func (dao *Dao) CountArticle(title string, desc string, content string, state in
 
 	return article.Count(dao.engine)
 }
+
+func (dao *Dao) GetArticle(id int) ([]*model.Article, error) {
+	article := model.Article{Model: &model.Model{ID: id}}
+
+	return article.Get(dao.engine)
+}
