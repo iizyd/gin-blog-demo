@@ -1,6 +1,6 @@
 <template>
   <div class="board-wrap">
-    content
+    board
   </div>
 </template>
 

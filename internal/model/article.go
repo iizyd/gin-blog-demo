@@ -73,7 +73,7 @@ func (a Article) Count(db *gorm.DB) (int, error) {
 		db = db.Where("'state' = ?", a.State)
 	}
 
-	if err := db.Model(&a).Where("'is_del' = ?", 0).Count(&count).Error; err != nil {
+	if err := db.Model(&a).Where("`is_del` = ?", 0).Count(&count).Error; err != nil {
 		return 0, err
 	}
 
