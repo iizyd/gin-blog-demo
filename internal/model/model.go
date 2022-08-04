@@ -13,12 +13,12 @@ import (
 
 type Model struct {
 	ID         int            `gorm:"primary_key" json:"id"`
-	CreatedBy  string         `json:"created_by"`
-	ModifiedBy string         `json:"modified_by"`
-	CreatedOn  *app.LocalTime `json:"created_on"`
-	ModifiedOn *app.LocalTime `json:"modified_on"`
-	DeletedOn  *app.LocalTime `json:"deleted_on"`
-	IsDel      int            `json:"is_del"`
+	CreatedBy  string         `form:"created_by" json:"created_by"`
+	ModifiedBy string         `form:"modified_by" json:"modified_by"`
+	CreatedOn  *app.LocalTime `form:"created_on" json:"created_on"`
+	ModifiedOn *app.LocalTime `form:"modified_on" json:"modified_on"`
+	DeletedOn  *app.LocalTime `form:"deleted_on" json:"deleted_on"`
+	IsDel      int            `form:"is_del" json:"is_del"`
 }
 
 func NewDBEngine(databaseSetting *setting.DatabaseSettingS) (*gorm.DB, error) {

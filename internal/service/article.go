@@ -6,12 +6,12 @@ import (
 )
 
 type CreateArticleRequest struct {
-	Title         string `form:"title" binding:"required,min=1,max=100"`
-	Desc          string `form:"desc" binding:"required,min=0,max=100"`
-	CoverImageUrl string `form:"cover_image_url" binding:"omitempty,min=0,max=100"`
-	Content       string `form:"content" binding:"-"`
-	CreatedBy     string `form:"created_by" binding:"required,min=2,max=100"`
-	State         int    `form:"state,default=1" binding:"omitempty,oneof=0 1"`
+	Title         string `form:"title" json:"title" binding:"required,min=1,max=100"`
+	Desc          string `form:"desc" json:"desc" binding:"required,min=0,max=100"`
+	CoverImageUrl string `form:"cover_image_url" json:"cover_image_url" binding:"omitempty,min=0,max=100"`
+	Content       string `form:"content" json:"content" binding:"-"`
+	CreatedBy     string `form:"created_by" json:"created_by" binding:"required,min=2,max=100"`
+	State         int    `form:"state,default=1" json:"state,default=1" binding:"omitempty,oneof=0 1"`
 }
 
 type ListArticleRequest struct {

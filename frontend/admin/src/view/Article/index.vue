@@ -1,6 +1,8 @@
 <template>
   <div class="article-wrap">
     <n-space vertical>
+      <n-button type="primary" @click="onCreate">添 加</n-button>
+
       <n-data-table
         remote
         bordered
@@ -12,10 +14,15 @@
         :row-key="rowKey"
         @update:page="handlePageChange"
         flex-height
-        :style="{ height: 'calc(100vh - 85px)' }"
+        :style="{ height: 'calc(100vh - 85px - 34px)' }"
       />
 
-      <Modal />
+      <Modal
+        v-model:show_modal="show_modal"
+        :article_id="article_id"
+        :modal_type="modal_type"
+        @refresh="getData"
+      />
     </n-space>
   </div>
 </template>
@@ -28,6 +35,8 @@ import {
   PaginationInfo,
   NImage,
   NTag,
+  NPopconfirm,
+  useMessage,
 } from "naive-ui";
 import { h, reactive, ref, VNode } from "vue";
 import apis from "@/apis/apis";
@@ -43,12 +52,33 @@ interface ArticleItem {
   state: number;
 }
 
-const onEdit = (row: ArticleItem) => {
-  console.log(row);
+const message = useMessage();
+
+const show_modal = ref<boolean>(false);
+const modal_type = ref<"new" | "edit">("new");
+const article_id = ref(0);
+
+const onCreate = () => {
+  modal_type.value = "new";
+  article_id.value = 0;
+  show_modal.value = true;
 };
 
-const onDel = (row: ArticleItem) => {
-  console.log(row);
+const onEdit = (row: ArticleItem) => {
+  modal_type.value = "edit";
+  article_id.value = row.id;
+  show_modal.value = true;
+};
+
+const onDel = async (row: ArticleItem) => {
+  const res = await apis.delArticle(row.id);
+
+  if (res.code === 0) {
+    message.success("删除成功");
+    getData();
+  } else {
+    message.error("删除失败");
+  }
 };
 
 const columns = ref([
@@ -86,8 +116,7 @@ const columns = ref([
         {
           width: 40,
           src: row.cover_image_url,
-          fallbackSrc:
-            "https://picx.zhimg.com/80/v2-9c5b94a0fd324ed303373c0c7e3b208d_1440w.jpg?source=1940ef5c",
+          fallbackSrc: "",
         },
         {}
       );
@@ -139,14 +168,25 @@ const columns = ref([
           { default: () => "编辑" }
         ),
         h(
-          NButton,
+          NPopconfirm,
           {
-            text: true,
-            type: "error",
-            size: "medium",
-            onClick: () => onDel(row),
+            onPositiveClick: () => onDel(row),
+            negativeText: "取消",
+            positiveText: "确认",
           },
-          { default: () => "删除" }
+          {
+            trigger: () =>
+              h(
+                NButton,
+                {
+                  text: true,
+                  type: "error",
+                  size: "medium",
+                },
+                { default: () => "删除" }
+              ),
+            default: () => "确认删除？",
+          }
         ),
       ]);
     },
@@ -182,7 +222,6 @@ const getData = async () => {
     page: pagination.page,
     page_size: pagination.pageSize,
   });
-  console.log(res);
 
   if (res.code === 0) {
     data.value = res.data.list;

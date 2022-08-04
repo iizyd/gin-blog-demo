@@ -7,11 +7,11 @@ import (
 
 type Article struct {
 	*Model
-	Title         string `json:"title"`
-	Desc          string `json:"desc"`
-	Content       string `json:"content"`
-	CoverImageUrl string `json:"cover_image_url"`
-	State         int    `json:"state"`
+	Title         string `form:"title" json:"title"`
+	Desc          string `form:"desc" json:"desc"`
+	Content       string `form:"content" json:"content"`
+	CoverImageUrl string `form:"cover_image_url" json:"cover_image_url"`
+	State         int    `form:"state" json:"state"`
 }
 
 type ArticleSwagger struct {
