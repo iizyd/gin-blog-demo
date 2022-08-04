@@ -1,8 +1,6 @@
 package v1
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 	"github.com/iamzhiyudong/xigua-blog/global"
 	"github.com/iamzhiyudong/xigua-blog/internal/service"
@@ -107,7 +105,6 @@ func (a Article) Create(c *gin.Context) {
 	response := app.NewResponse(c)
 
 	valid, errs := app.BindAndValid(c, &params)
-	fmt.Printf("%v", params)
 	if !valid {
 		global.Logger.Errorf("app.BindAndValid errs: %v", errs)
 		response.ToErrorResponse(errcode.InvalidParams.WithDetails(errs.Errors()...))
