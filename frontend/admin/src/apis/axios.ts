@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 interface ResBody {
   code: number;
@@ -31,20 +31,17 @@ export const Get = (
 
 export const Post = (
   url: string,
-  data: Record<string, any>
+  data: Record<string, any>,
+  config: AxiosRequestConfig = {}
 ): Promise<ResBody> => {
-  return http.post(url, {
-    data,
-  });
+  return http.post(url, data, config);
 };
 
 export const Put = (
   url: string,
   data: Record<string, any>
 ): Promise<ResBody> => {
-  return http.put(url, {
-    data,
-  });
+  return http.put(url, data);
 };
 
 export const Del = (
