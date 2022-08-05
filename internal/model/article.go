@@ -25,12 +25,18 @@ func (a Article) TableName() string {
 }
 
 func (a Article) Create(db *gorm.DB) error {
-	return db.Create(&a).Error
+	err := db.Omit("Tag").Create(&a).Error
+	if err != nil {
+		return err
+	}
+	return db.Model(&a).Preload("Tag").Association("Tag").Replace(a.Tag).Error
 }
 
 func (a Article) List(db *gorm.DB, pageOffset, pageSize int) ([]*Article, error) {
 	var articles []*Article
 	var err error
+
+	db = db.Preload("Tag")
 
 	if pageOffset >= 0 && pageSize > 0 {
 		db = db.Offset(pageOffset).Limit(pageSize)
@@ -84,7 +90,7 @@ func (a Article) Count(db *gorm.DB) (int, error) {
 func (a Article) Get(db *gorm.DB) ([]*Article, error) {
 	var article []*Article
 
-	if err := db.Where("`id` = ? AND is_del = ?", a.ID, 0).First(&article).Error; err != nil {
+	if err := db.Preload("Tag").Where("`id` = ? AND is_del = ?", a.ID, 0).First(&article).Error; err != nil {
 		return nil, err
 	}
 

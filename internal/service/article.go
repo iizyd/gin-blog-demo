@@ -51,7 +51,7 @@ type DeleteArticleRequest struct {
 }
 
 func (s *Service) CreateArticle(param *CreateArticleRequest) error {
-	return s.dao.CreateArticle(param.Title, param.Desc, param.CoverImageUrl, param.Content, param.CreatedBy, param.State)
+	return s.dao.CreateArticle(param.Title, param.Desc, param.CoverImageUrl, param.Content, param.CreatedBy, param.State, param.Tag)
 }
 
 func (s *Service) ListArticle(param *ListArticleRequest, pager *app.Pager) ([]*model.Article, error) {

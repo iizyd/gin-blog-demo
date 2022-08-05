@@ -5,7 +5,7 @@ import (
 	"github.com/iamzhiyudong/xigua-blog/pkg/app"
 )
 
-func (dao *Dao) CreateArticle(title string, desc string, cover_image_url string, content string, createdBy string, state int) error {
+func (dao *Dao) CreateArticle(title string, desc string, cover_image_url string, content string, createdBy string, state int, tag []int) error {
 	article := model.Article{
 		Title:         title,
 		Desc:          desc,
@@ -15,6 +15,14 @@ func (dao *Dao) CreateArticle(title string, desc string, cover_image_url string,
 		Model: &model.Model{
 			CreatedBy: createdBy,
 		},
+	}
+
+	if len(tag) != 0 {
+		var tags []model.Tag
+		for _, val := range tag {
+			tags = append(tags, model.Tag{Model: &model.Model{ID: val}})
+		}
+		article.Tag = tags
 	}
 	return article.Create(dao.engine)
 }
