@@ -10,6 +10,7 @@ type CreateArticleRequest struct {
 	Desc          string `form:"desc" json:"desc" binding:"required,min=0,max=100"`
 	CoverImageUrl string `form:"cover_image_url" json:"cover_image_url" binding:"omitempty,min=0,max=100"`
 	Content       string `form:"content" json:"content" binding:"-"`
+	Tag           []int  `form:"tag[]" json:"tag[]" binding:"-"`
 	CreatedBy     string `form:"created_by" json:"created_by" binding:"required,min=2,max=100"`
 	State         int    `form:"state,default=1" json:"state,default=1" binding:"omitempty,oneof=0 1"`
 }
@@ -39,6 +40,7 @@ type UpdateArticleRequest struct {
 	Title         string `json:"title" form:"title" binding:"omitempty,min=1,max=100"`
 	Desc          string `json:"desc" form:"desc" binding:"omitempty,min=0,max=100"`
 	CoverImageUrl string `json:"cover_image_url" form:"cover_image_url" binding:"omitempty,min=0,max=100"`
+	Tag           []int  `form:"tag[]" json:"tag[]" binding:"-"`
 	Content       string `json:"content" form:"content" binding:"-"`
 	ModifiedBy    string `json:"modified_by" form:"modified_by" binding:"required,min=2,max=100"`
 	State         int    `json:"state" form:"state" binding:"omitempty,oneof=0 1"`
@@ -65,7 +67,7 @@ func (s *Service) GetArticle(param *GetArticleRequest) ([]*model.Article, error)
 }
 
 func (s *Service) UpdateArticle(param *UpdateArticleRequest) error {
-	return s.dao.UpdateArticle(param.ID, param.Title, param.Desc, param.CoverImageUrl, param.Content, param.ModifiedBy, param.State)
+	return s.dao.UpdateArticle(param.ID, param.Title, param.Desc, param.CoverImageUrl, param.Content, param.ModifiedBy, param.State, param.Tag)
 }
 
 func (s *Service) DeleteArticle(param *DeleteArticleRequest) error {

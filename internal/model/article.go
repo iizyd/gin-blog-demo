@@ -12,6 +12,7 @@ type Article struct {
 	Content       string `form:"content" json:"content"`
 	CoverImageUrl string `form:"cover_image_url" json:"cover_image_url"`
 	State         int    `form:"state" json:"state"`
+	Tag           []Tag  `gorm:"many2many:blog_article_tag" json:"tag"`
 }
 
 type ArticleSwagger struct {
@@ -91,7 +92,11 @@ func (a Article) Get(db *gorm.DB) ([]*Article, error) {
 }
 
 func (a Article) Update(db *gorm.DB, values any) error {
-	if err := db.Model(a).Where("id = ? AND is_del = ?", a.ID, 0).Updates(values).Error; err != nil {
+	db = db.Model(a).Where("id = ? AND is_del = ?", a.ID, 0)
+	if err := db.Omit("Tag").Updates(values).Error; err != nil {
+		return err
+	}
+	if err := db.Model(&a).Preload("Tag").Association("Tag").Replace(a.Tag).Error; err != nil {
 		return err
 	}
 	return nil

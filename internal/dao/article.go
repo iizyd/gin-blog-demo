@@ -49,7 +49,7 @@ func (dao *Dao) GetArticle(id int) ([]*model.Article, error) {
 	return article.Get(dao.engine)
 }
 
-func (dao *Dao) UpdateArticle(id int, title, desc, cover_image_url, content, modified_by string, state int) error {
+func (dao *Dao) UpdateArticle(id int, title, desc, cover_image_url, content, modified_by string, state int, tag []int) error {
 	article := model.Article{
 		Model: &model.Model{
 			ID:         id,
@@ -77,6 +77,13 @@ func (dao *Dao) UpdateArticle(id int, title, desc, cover_image_url, content, mod
 	}
 	if state != -1 {
 		values["state"] = state
+	}
+	if len(tag) != 0 {
+		var tags []model.Tag
+		for _, val := range tag {
+			tags = append(tags, model.Tag{Model: &model.Model{ID: val}})
+		}
+		article.Tag = tags
 	}
 
 	return article.Update(dao.engine, values)
