@@ -110,6 +110,7 @@ const columns = ref([
     ellipsis: {
       tooltip: true,
     },
+    width: 70,
     render(row: ArticleItem): VNode {
       return h(
         NImage,
@@ -126,7 +127,7 @@ const columns = ref([
     title: "内容",
     key: "content",
     ellipsis: {
-      tooltip: true,
+      tooltip: false,
     },
   },
   {
@@ -144,10 +145,10 @@ const columns = ref([
       return h(
         NTag,
         {
-          type: row.state === 0 ? "error" : "success",
+          type: row.state === 0 ? "warning" : "success",
           size: "medium",
         },
-        { default: () => (row.state === 0 ? "下线" : "上线") }
+        { default: () => (row.state === 0 ? "草稿" : "发布") }
       );
     },
   },
@@ -199,7 +200,7 @@ const pagination = reactive({
   page: 1,
   pageCount: 1,
   pageSize: 10,
-  itemCount: 100,
+  itemCount: 0,
   prefix({ itemCount }: PaginationInfo) {
     return `共 ${itemCount} 条`;
   },

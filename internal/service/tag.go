@@ -16,9 +16,9 @@ type TagListRequest struct {
 }
 
 type CreateTagRequest struct {
-	Name      string `form:"name" binding:"required,min=2,max=100"`
-	CreatedBy string `form:"created_by" binding:"required,min=2,max=100"`
-	State     int    `form:"state,default=1" binding:"omitempty,oneof=0 1"`
+	Name      string `form:"name" json:"name" binding:"required,min=2,max=100"`
+	CreatedBy string `form:"created_by" json:"created_by" binding:"required,min=2,max=100"`
+	State     int    `form:"state,default=1" json:"state,default=1" binding:"omitempty,oneof=0 1"`
 }
 
 type UpdateTagRequest struct {

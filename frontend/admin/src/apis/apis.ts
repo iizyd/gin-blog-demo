@@ -24,6 +24,22 @@ const apis = {
         "Content-Type": "multipart/form-data",
       },
     }),
+
+  // 获取标签列表
+  getTags: (data: any = {}) => Get("/api/v1/tags", data),
+
+  // 创建标签
+  createTag: (data: { name: string; state?: number; created_by: string }) =>
+    Post(`/api/v1/tags`, data),
+
+  // 修改标签
+  updateTag: (
+    id: number,
+    data: { name?: string; state?: number; modified_by: string }
+  ) => Put(`/api/v1/tags/${id}`, data),
+
+  // 删除标签
+  delTag: (id: string | number) => Del(`/api/v1/tags/${id}`, {}),
 };
 
 export default apis;

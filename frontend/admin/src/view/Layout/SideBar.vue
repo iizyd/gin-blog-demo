@@ -9,7 +9,7 @@
     @collapse="collapsed = true"
     @expand="collapsed = false"
   >
-    <div v-show="!collapsed" class="logo-box">博客中台</div>
+    <div v-show="!collapsed" class="logo-box">DEMO</div>
 
     <n-menu
       v-model:value="activeKey"

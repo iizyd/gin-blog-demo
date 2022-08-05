@@ -12,54 +12,56 @@
   >
     <template #default>
       <div class="main">
-        <n-form
-          ref="formRef"
-          :model="form"
-          :rules="rules"
-          label-placement="left"
-          label-width="auto"
-          require-mark-placement="right-hanging"
-          size="small"
-          :inline="false"
-        >
-          <n-form-item label="标题" path="title">
-            <n-input v-model:value="form.title" placeholder="标题" />
-          </n-form-item>
+        <n-scrollbar style="max-height: 80vh">
+          <n-form
+            ref="formRef"
+            :model="form"
+            :rules="rules"
+            label-placement="left"
+            label-width="auto"
+            require-mark-placement="right-hanging"
+            size="small"
+            :inline="false"
+          >
+            <n-form-item label="标题" path="title">
+              <n-input v-model:value="form.title" placeholder="标题" />
+            </n-form-item>
 
-          <n-form-item label="描述" path="desc">
-            <n-input
-              type="textarea"
-              v-model:value="form.desc"
-              placeholder="描述"
-            />
-          </n-form-item>
+            <n-form-item label="描述" path="desc">
+              <n-input
+                type="textarea"
+                v-model:value="form.desc"
+                placeholder="描述"
+              />
+            </n-form-item>
 
-          <n-form-item label="状态" path="state">
-            <n-switch v-model:value="form.state" />
-          </n-form-item>
+            <n-form-item label="状态" path="state">
+              <n-switch v-model:value="form.state" />
+            </n-form-item>
 
-          <n-form-item label="内容" path="content">
-            <n-input
-              type="textarea"
-              v-model:value="form.content"
-              placeholder="内容"
-            />
-          </n-form-item>
+            <n-form-item label="内容" path="content">
+              <md-editor
+                v-model="form.content"
+                :toolbarsExclude="['save', 'github']"
+                @on-upload-img="onUploadImg"
+              />
+            </n-form-item>
 
-          <n-form-item label="封面图片">
-            <n-upload
-              action="http://127.0.0.1:8000"
-              :default-file-list="fileList"
-              list-type="image-card"
-              :custom-request="customUpload"
-              :max="1"
-              accept="image/png, image/jpeg"
-              @remove="onFileRemove"
-            >
-              上传文件
-            </n-upload>
-          </n-form-item>
-        </n-form>
+            <n-form-item label="封面图片">
+              <n-upload
+                action="http://127.0.0.1:8000"
+                :default-file-list="fileList"
+                list-type="image-card"
+                :custom-request="customUpload"
+                :max="1"
+                accept="image/png, image/jpeg"
+                @remove="onFileRemove"
+              >
+                上传文件
+              </n-upload>
+            </n-form-item>
+          </n-form>
+        </n-scrollbar>
       </div>
     </template>
   </n-modal>
@@ -79,8 +81,11 @@ import {
   useMessage,
   UploadCustomRequestOptions,
   FormInst,
+  NScrollbar,
 } from "naive-ui";
 import { reactive, ref, toRefs, watch } from "vue";
+import MdEditor from "md-editor-v3";
+import "md-editor-v3/lib/style.css";
 
 const message = useMessage();
 const props = withDefaults(
@@ -152,7 +157,6 @@ const resetForm = () => {
 const onOK = async () => {
   formRef.value?.validate(async (errors) => {
     if (errors) {
-      console.log(errors);
       message.error("请填写完整");
       return false;
     } else {
@@ -292,11 +296,32 @@ const createArticle = async () => {
 
   return Promise.resolve(res.code === 0);
 };
+
+// 编辑器
+const onUploadImg = async (files: File[], callback: any) => {
+  const res = await Promise.all(
+    files.map((file) => {
+      return new Promise((rev, rej) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("type", "1");
+
+        apis
+          .uploadFile(formData)
+          .then((res) => rev(res))
+          .catch((error) => rej(error));
+      });
+    })
+  );
+
+  callback(res.map((item: any) => item.data.file_access_url));
+};
 </script>
 
 <style lang="less" scoped>
 .main {
   width: 80vw;
   height: 80vh;
+  padding-top: 10px;
 }
 </style>
