@@ -69,5 +69,12 @@ func (t Tag) Update(db *gorm.DB, values interface{}) error {
 }
 
 func (t Tag) Delete(db *gorm.DB) error {
-	return db.Where("id = ? AND is_del = ?", t.Model.ID, 0).Delete(&t).Error
+	var err error
+
+	db = db.Where("id = ? AND is_del = ?", t.Model.ID, 0)
+	if err = db.Delete(&t).Error; err != nil {
+		return err
+	}
+
+	return db.Model(&t).Association("Article").Clear().Error
 }
