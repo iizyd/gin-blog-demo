@@ -60,6 +60,16 @@
                 上传文件
               </n-upload>
             </n-form-item>
+
+            <n-form-item label="标签" path="tag">
+              <n-select
+                v-model:value="form.tag"
+                multiple
+                :options="tag_list"
+                placeholder="选择标签"
+                clearable
+              />
+            </n-form-item>
           </n-form>
         </n-scrollbar>
       </div>
@@ -82,6 +92,7 @@ import {
   UploadCustomRequestOptions,
   FormInst,
   NScrollbar,
+  NSelect,
 } from "naive-ui";
 import { reactive, ref, toRefs, watch } from "vue";
 import MdEditor from "md-editor-v3";
@@ -118,6 +129,7 @@ const form = reactive<{
   cover_image_url?: string;
   content?: string;
   modified_by?: string;
+  tag?: number[];
 }>({
   title: "",
   desc: "",
@@ -125,6 +137,7 @@ const form = reactive<{
   cover_image_url: "",
   content: "",
   modified_by: "zz",
+  tag: [],
 });
 
 const rules = {
@@ -150,6 +163,7 @@ const resetForm = () => {
   form.content = "";
   form.cover_image_url = "";
   form.modified_by = "zz";
+  form.tag = []
 
   fileList.value = [];
 };
@@ -264,6 +278,8 @@ const getArticleInfo = async () => {
     form.state = Boolean(data.state);
     form.cover_image_url = data.cover_image_url;
     form.modified_by = data.modified_by || "zz";
+    
+    form.tag = (data.tag as {id: number}[])?.map((item) => item.id)
 
     if (data.cover_image_url) {
       fileList.value[0] = {
@@ -316,6 +332,27 @@ const onUploadImg = async (files: File[], callback: any) => {
 
   callback(res.map((item: any) => item.data.file_access_url));
 };
+
+// 标签下拉框
+const tag_list = ref<{ value?: number; label?: string }[]>([]);
+
+const getTagList = async () => {
+  const res = await apis.getTags({
+    page: 1,
+    page_size: 9999,
+  });
+
+  if (res.code === 0) {
+    tag_list.value =
+      (res.data?.list as { id: number; name: string }[]).map((item) => {
+        return {
+          label: item.name,
+          value: item.id,
+        };
+      }) || [];
+  }
+};
+getTagList();
 </script>
 
 <style lang="less" scoped>

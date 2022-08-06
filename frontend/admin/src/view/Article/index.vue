@@ -50,6 +50,7 @@ interface ArticleItem {
   content: string;
   modified_on: string;
   state: number;
+  tag: { id?: number; name?: string }[];
 }
 
 const message = useMessage();
@@ -110,7 +111,6 @@ const columns = ref([
     ellipsis: {
       tooltip: true,
     },
-    width: 70,
     render(row: ArticleItem): VNode {
       return h(
         NImage,
@@ -124,10 +124,24 @@ const columns = ref([
     },
   },
   {
-    title: "内容",
-    key: "content",
+    title: "标签",
+    key: "tag",
     ellipsis: {
       tooltip: false,
+    },
+    render(row: ArticleItem): VNode {
+      return h("span", { class: "table-tag-wrap" }, [
+        ...row.tag?.map((item) =>
+          h(
+            NTag,
+            {
+              type: "info",
+              size: "small",
+            },
+            { default: () => item.name }
+          )
+        ),
+      ]);
     },
   },
   {
@@ -240,6 +254,16 @@ getData();
 
   :deep(.n-button + .n-button) {
     margin-left: 10px;
+  }
+
+  :deep(.table-tag-wrap) {
+    display: flex;
+    flex-wrap: wrap;
+
+    .n-tag {
+      margin-top: 3px;
+      margin-left: 3px;
+    }
   }
 }
 </style>
