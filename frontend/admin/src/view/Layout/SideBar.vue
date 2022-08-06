@@ -72,10 +72,14 @@ const activeKey = ref("");
 
 const route = useRoute();
 
+const setMenuActive = () => {
+  activeKey.value = (route.matched[1]?.name || "") as string;
+};
+
 watch(
   route,
   () => {
-    activeKey.value = (route.matched[0]?.name || "") as string;
+    setMenuActive();
   },
   { deep: true, immediate: true }
 );

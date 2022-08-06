@@ -1,9 +1,7 @@
 <template>
   <n-notification-provider>
     <n-message-provider>
-      <Layout>
-        <router-view />
-      </Layout>
+      <router-view />
     </n-message-provider>
   </n-notification-provider>
 </template>

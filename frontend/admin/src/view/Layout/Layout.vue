@@ -8,7 +8,7 @@
       </n-layout-header>
 
       <n-layout-content :native-scrollbar="false">
-        <slot name="default"></slot>
+        <router-view />
       </n-layout-content>
 
       <!-- <n-layout-footer>xigua-blog</n-layout-footer> -->
