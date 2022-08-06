@@ -9,8 +9,8 @@ import (
 )
 
 type Claims struct {
-	AppKey    string `json:"app_key"`
-	AppSecret string `json:"app_secret"`
+	UserName string `json:"user_name"`
+	Password string `json:"password"`
 	jwt.StandardClaims
 }
 
@@ -18,12 +18,12 @@ func GetJWTSecret() []byte {
 	return []byte(global.JWTSetting.Secret)
 }
 
-func GenerateToken(appKey, appSecret string) (string, error) {
+func GenerateToken(UserName, Password string) (string, error) {
 	nowTime := time.Now()
 	expireTime := nowTime.Add(global.JWTSetting.Expire)
 	claims := Claims{
-		AppKey:    util.EncodeMD5(appKey),
-		AppSecret: util.EncodeMD5(appSecret),
+		UserName: util.EncodeMD5(UserName),
+		Password: util.EncodeMD5(Password),
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expireTime.Unix(),
 			Issuer:    global.JWTSetting.Issuer,

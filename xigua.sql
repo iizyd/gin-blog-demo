@@ -60,8 +60,8 @@ CREATE TABLE `blog_article_tag` (
 DROP TABLE IF EXISTS `blog_auth`;
 CREATE TABLE `blog_auth` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `app_key` varchar(20) DEFAULT '' COMMENT 'Key',
-  `app_secret` varchar(50) DEFAULT '' COMMENT 'Secret',
+  `user_name` varchar(20) DEFAULT '' COMMENT 'Key',
+  `password` varchar(50) DEFAULT '' COMMENT 'Secret',
   
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `created_by` varchar(100) DEFAULT '' COMMENT '创建人',

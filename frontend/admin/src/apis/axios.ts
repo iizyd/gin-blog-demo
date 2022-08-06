@@ -1,3 +1,5 @@
+import { TOKEN_NAME } from "@/constant";
+import utils from "@/utils";
 import axios, { AxiosRequestConfig } from "axios";
 
 interface ResBody {
@@ -9,6 +11,9 @@ interface ResBody {
 const http = axios.create({
   baseURL: "http://127.0.0.1:8000/",
   timeout: 10000,
+  headers: {
+    Token: localStorage.getItem(TOKEN_NAME) || "",
+  },
 });
 
 http.interceptors.response.use(
@@ -16,7 +21,13 @@ http.interceptors.response.use(
     return response.data as ResBody;
   },
   function (error) {
-    return Promise.reject(error);
+    if (error && error.response) {
+      switch(error.response.status) {
+        case 401:
+          utils.logout();
+      }
+    }
+    return Promise.resolve(error.response);
   }
 );
 

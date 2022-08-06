@@ -2,6 +2,7 @@ package routers
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/iamzhiyudong/xigua-blog/global"
@@ -19,7 +20,13 @@ func NewRouter() *gin.Engine {
 	r := gin.New()
 	r.Use(gin.Logger())
 	r.Use(gin.Recovery())
-	r.Use(cors.Default())
+	r.Use(cors.New(cors.Config{
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "Token"},
+		AllowCredentials: false,
+		MaxAge:           12 * time.Hour,
+		AllowAllOrigins:  true,
+	}))
 	r.Use(middleware.Translations())
 
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
@@ -34,7 +41,7 @@ func NewRouter() *gin.Engine {
 	r.POST("/auth", api.GetAuth)
 
 	apiv1 := r.Group("/api/v1")
-	// apiv1.Use(middleware.JWT())
+	apiv1.Use(middleware.JWT())
 	apiv1.Use(middleware.AccessLog())
 	{
 		// 标签

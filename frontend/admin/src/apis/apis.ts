@@ -40,6 +40,9 @@ const apis = {
 
   // 删除标签
   delTag: (id: string | number) => Del(`/api/v1/tags/${id}`, {}),
+
+  // 登录
+  Login: (data: { user_name: string; password: string }) => Post("/auth", data),
 };
 
 export default apis;
