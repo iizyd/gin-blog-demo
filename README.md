@@ -1,6 +1,6 @@
-<p align="center">
-  <h1>XiGuaBlog</h1>
-</p>
+<h1 text-align="center">xigua-blog</h1>
+
+---
 
 ## 项目简介
 
@@ -46,15 +46,18 @@
 - [ ] 博客前端接口
 
 ### Vue3 管理系统前端
+
 - [x] 管理系统登录
 - [x] 文章管理
 - [x] 标签管理
 - [x] 图片上传
 
 ### Vue3 博客前端
+
 - [ ] 文章列表
 - [ ] 标签
 - [ ] 文章详情
 
 ## 感谢
+
 - [煎鱼 - go 实战博客](https://golang2.eddycjy.com/)
