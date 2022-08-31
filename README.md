@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-基于 Go 和 Vue3 实现的简易博客系统，可作为 Go、Vue3、Nestjs、TS 的练习项目。
+基于 Go、Nestjs 和 Vue3 实现的简易博客系统，可作为 Go、Vue3、Nestjs、TS 的练习项目。
 
 ## 预览地址
 
