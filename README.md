@@ -60,8 +60,10 @@
 
 |  文件夹 | 描述  |
 |  :----:  | :----: |
-| .  | 目前默认根目录是 go 项目的代码 |
-| frontend  | 存放前端代码 |
+| server  | 后端代码 |
+| server/go | go 版本后端目录 |
+| server/xigua-blog-nest | nestjs 版本后端目录 |
+| frontend  | 前端代码 |
 | frontend/admin | 后台管理系统前端 |
 
 ## 感谢
