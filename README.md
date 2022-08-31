@@ -1,6 +1,4 @@
-<h1 text-align="center">xigua-blog</h1>
-
----
+<h1 align='center' >xigua-blog</h1>
 
 ## 项目简介
 
@@ -57,6 +55,14 @@
 - [ ] 文章列表
 - [ ] 标签
 - [ ] 文章详情
+
+## 目录结构
+
+|  文件夹 | 描述  |
+|  :----:  | :----: |
+| .  | 目前默认根目录是 go 项目的代码 |
+| frontend  | 存放前端代码 |
+| frontend/admin | 后台管理系统前端 |
 
 ## 感谢
 
