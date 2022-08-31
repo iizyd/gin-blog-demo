@@ -1,4 +1,6 @@
-# XiaGuaBlog
+<p align="center">
+  <h1>XiGuaBlog</h1>
+</p>
 
 ## 项目简介
 
