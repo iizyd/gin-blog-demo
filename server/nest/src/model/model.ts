@@ -1,7 +1,7 @@
 import { Column } from 'typeorm';
 
 export abstract class Model {
-  @Column('tinyint', { default: 0 })
+  @Column('tinyint')
   state: number;
 
   @Column('tinyint', { default: 0 })

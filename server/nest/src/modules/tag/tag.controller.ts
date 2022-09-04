@@ -7,11 +7,14 @@ import {
   Delete,
   Put,
   Query,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { TagService } from './tag.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
 import { Pager } from '../../decorator/pager.decorator';
+import { ListTagDto } from './dto/list-tag.dto';
 
 @Controller('tag')
 export class TagController {
@@ -23,9 +26,10 @@ export class TagController {
   }
 
   @Get()
-  findAll(@Query() query, @Pager() pager: Pager) {
+  findAll(@Query() listTagDto: ListTagDto, @Pager() pager: Pager) {
     console.log(pager);
-    return this.tagService.findAll();
+    console.log(listTagDto);
+    return this.tagService.findAll(listTagDto, pager);
   }
 
   @Get(':id')

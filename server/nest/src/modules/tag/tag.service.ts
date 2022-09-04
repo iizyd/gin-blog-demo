@@ -3,7 +3,9 @@ import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from './entities/tag.entity';
-import { Repository } from 'typeorm';
+import { FindManyOptions, Repository } from 'typeorm';
+import { ListTagDto } from './dto/list-tag.dto';
+import { Pager } from '../../decorator/pager.decorator';
 
 @Injectable()
 export class TagService {
@@ -13,8 +15,14 @@ export class TagService {
     return 'This action adds a new tag';
   }
 
-  async findAll() {
-    return await this.tagRepository.find();
+  async findAll(listTagDto: ListTagDto, pager: Pager) {
+    const findOption: FindManyOptions = { where: { ...listTagDto } };
+    if (pager.ok) {
+      findOption.skip = pager.page_offset;
+      findOption.take = pager.page_size;
+    }
+    console.log(findOption);
+    return await this.tagRepository.find(findOption);
   }
 
   findOne(id: number) {
