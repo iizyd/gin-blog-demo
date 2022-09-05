@@ -1,6 +1,6 @@
 import { Column } from 'typeorm';
 
-export abstract class Model {
+export abstract class BaseEntity {
   @Column('tinyint')
   state: number;
 

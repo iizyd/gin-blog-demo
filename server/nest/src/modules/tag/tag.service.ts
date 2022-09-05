@@ -21,8 +21,12 @@ export class TagService {
       findOption.skip = pager.page_offset;
       findOption.take = pager.page_size;
     }
-    console.log(findOption);
     return await this.tagRepository.find(findOption);
+  }
+
+  async count(listTagDto: ListTagDto) {
+    const findOption: FindManyOptions = { where: { ...listTagDto } };
+    return await this.tagRepository.count(findOption);
   }
 
   findOne(id: number) {

@@ -1,7 +1,8 @@
-import { IsIn, IsNumber, IsOptional, Length } from 'class-validator';
+import { IsIn, IsOptional, Length } from 'class-validator';
 import { Type } from 'class-transformer';
+import { BaseDto } from '../../../dto/base.dto';
 
-export class ListTagDto {
+export class ListTagDto extends BaseDto {
   @Length(0, 100)
   @IsOptional()
   name: string;
