@@ -5,7 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from './entities/tag.entity';
 import { FindManyOptions, Repository } from 'typeorm';
 import { ListTagDto } from './dto/list-tag.dto';
-import { Pager } from '../../decorator/pager.decorator';
+import { Pager } from '../../decorators/pager.decorator';
 
 @Injectable()
 export class TagService {

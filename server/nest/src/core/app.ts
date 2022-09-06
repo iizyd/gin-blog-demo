@@ -1,4 +1,4 @@
-import { Pager } from '../decorator/pager.decorator';
+import { Pager } from '../decorators/pager.decorator';
 
 export const ResponseList = (
   data: Record<any, any>[],

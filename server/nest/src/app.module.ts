@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { TagModule } from './modules/tag/tag.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptorInterceptor } from './interceptors/response-interceptor.interceptor';
-import { HttpExceptionFilter } from './filter/http-exception.filter';
+import { HttpExceptionFilter } from './filters/http-exception.filter';
 
 @Module({
   imports: [

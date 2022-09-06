@@ -11,7 +11,7 @@ import {
 import { TagService } from './tag.service';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { UpdateTagDto } from './dto/update-tag.dto';
-import { Pager } from '../../decorator/pager.decorator';
+import { Pager } from '../../decorators/pager.decorator';
 import { ListTagDto } from './dto/list-tag.dto';
 import { ResponseList } from '../../core/app';
 
