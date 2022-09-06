@@ -3,8 +3,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TagModule } from './modules/tag/tag.module';
-import { APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptorInterceptor } from './interceptors/response-interceptor.interceptor';
+import { HttpExceptionFilter } from './filter/http-exception.filter';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ResponseInterceptorInterceptor } from './interceptors/response-intercep
   providers: [
     AppService,
     { provide: APP_INTERCEPTOR, useClass: ResponseInterceptorInterceptor },
+    { provide: APP_FILTER, useClass: HttpExceptionFilter },
   ],
 })
 export class AppModule {}
