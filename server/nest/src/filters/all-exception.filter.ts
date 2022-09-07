@@ -1,39 +1,35 @@
-import {
-  ArgumentsHost,
-  Catch,
-  ExceptionFilter,
-  HttpException,
-  Inject,
-} from '@nestjs/common';
+import { ArgumentsHost, Catch, ExceptionFilter, Inject } from '@nestjs/common';
 import { Response, Request } from 'express';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
 
 /**
- * 捕获 http 异常
+ * 捕获 非http 异常
+ * 在 HttpExceptionFilter 之前执行
+ * 如果发生 非http 异常，则直接返回 500
  */
-@Catch(HttpException)
-export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
+@Catch()
+export class AllExceptionFilter implements ExceptionFilter<Error> {
   constructor(
     @Inject(WINSTON_MODULE_PROVIDER)
     private readonly logger: Logger,
   ) {}
 
-  catch(exception: HttpException, host: ArgumentsHost) {
+  catch(exception: Error, host: ArgumentsHost) {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const status = exception.getStatus();
-    const exception_response = exception.getResponse() as any;
-    const message = exception_response.message
-      ? exception_response.message
-      : exception.message;
+    const status = 500;
+    const message = '服务器端错误';
 
     const response_object = {
       code: status,
       msg: message,
       data: null,
     };
+
+    // 向控制台输出
+    console.error(exception);
 
     this.logger.error({
       message: exception.stack,
@@ -48,6 +44,6 @@ export class HttpExceptionFilter implements ExceptionFilter<HttpException> {
       ],
     });
 
-    response.status(status).json(response_object);
+    response.status(500).json(response_object);
   }
 }
