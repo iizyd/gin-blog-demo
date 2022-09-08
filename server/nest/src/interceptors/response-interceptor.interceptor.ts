@@ -1,10 +1,12 @@
 import {
   CallHandler,
   ExecutionContext,
+  HttpStatus,
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
+import { errorCodes } from '../common/errors/code';
 
 interface Response<T> {
   data: T;
@@ -18,8 +20,9 @@ export class ResponseInterceptorInterceptor<T>
     return next.handle().pipe(
       map((data) => {
         return {
-          code: 200,
-          msg: '成功',
+          status: HttpStatus.OK,
+          code: errorCodes.Success.getCode(),
+          msg: errorCodes.Success.getMsg(),
           data: data,
         };
       }),

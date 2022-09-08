@@ -1,7 +1,14 @@
-import { ArgumentsHost, Catch, ExceptionFilter, Inject } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpStatus,
+  Inject,
+} from '@nestjs/common';
 import { Response, Request } from 'express';
 import { WINSTON_MODULE_PROVIDER } from 'nest-winston';
 import { Logger } from 'winston';
+import { errorCodes } from '../common/errors/code';
 
 /**
  * 捕获 非http 异常
@@ -19,12 +26,12 @@ export class AllExceptionFilter implements ExceptionFilter<Error> {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const status = 500;
-    const message = '服务器端错误';
+    const status = HttpStatus.INTERNAL_SERVER_ERROR;
 
     const response_object = {
-      code: status,
-      msg: message,
+      status,
+      code: errorCodes.ServerError.getCode(),
+      msg: errorCodes.ServerError.getMsg(),
       data: null,
     };
 
@@ -44,6 +51,6 @@ export class AllExceptionFilter implements ExceptionFilter<Error> {
       ],
     });
 
-    response.status(500).json(response_object);
+    response.status(status).json(response_object);
   }
 }
