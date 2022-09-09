@@ -1,0 +1,33 @@
+Server:
+  HttpPort: 8000
+
+App:
+  DefaultPageSize: 10
+  MaxPageSize: 100
+  UploadSavePath: src/storage/uploads
+  UploadServerUrl: http://127.0.0.1:8000/static
+  UploadImageMaxSize: 5  # MB
+  UploadImageAllowExts:
+    - .jpg
+    - .jpeg
+    - .png
+
+Log:
+  LogSavePath: src/storage/logs
+  LogFileName: application-%DATE%.log
+  MaxSize: 7m
+  MaxFiles: 7d
+
+DataBase:
+  DBType: mysql
+  Username: root  # 填写你的数据库账号
+  Password: 123456  # 填写你的数据库密码
+  Host: localhost
+  Port: 3306
+  DBName: xigua_blog
+  TablePrefix: blog_
+
+JWT:
+  Secret: zz
+  Issuer: xigua-blog
+  Expire: 7200

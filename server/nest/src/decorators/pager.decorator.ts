@@ -1,4 +1,5 @@
 import { createParamDecorator, ExecutionContext } from '@nestjs/common';
+import Config from '../config/config';
 
 export interface Pager {
   page: number;
@@ -6,9 +7,11 @@ export interface Pager {
   page_offset: number;
   ok: boolean;
 }
+
+const config = Config();
 const default_page = 1;
-const default_page_size = 10;
-const max_page_size = 100;
+const default_page_size = config.App.DefaultPageSize;
+const max_page_size = config.App.MaxPageSize;
 
 export const Pager = createParamDecorator<never, ExecutionContext, Pager>(
   (data: never, ctx: ExecutionContext): Pager => {

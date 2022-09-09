@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TagModule } from './modules/tag/tag.module';
@@ -8,24 +8,61 @@ import { ResponseInterceptorInterceptor } from './interceptors/response-intercep
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { WinstonModule } from 'nest-winston';
 import { AllExceptionFilter } from './filters/all-exception.filter';
-import { loggerOption } from './config/logger.config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import config from './config/config';
+import * as winston from 'winston';
+import 'winston-daily-rotate-file';
+
+const format = winston.format;
 
 @Module({
   imports: [
     TagModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '123456',
-      database: 'xigua_blog',
-      entityPrefix: 'blog_',
-      entities: [__dirname + '/**/*/entities/*{.ts,.js}'],
-      synchronize: false,
+    // config
+    ConfigModule.forRoot({ isGlobal: true, load: [config], cache: true }),
+    // database
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configServer: ConfigService) => {
+        const dbConfig = configServer.get('DataBase');
+        return {
+          type: dbConfig.DBType,
+          host: dbConfig.Host,
+          port: dbConfig.Port,
+          username: dbConfig.Username,
+          password: dbConfig.Password + '',
+          database: dbConfig.DBName,
+          entityPrefix: dbConfig.TablePrefix,
+          entities: [__dirname + '/**/*/entities/*{.ts,.js}'],
+          synchronize: false,
+        } as TypeOrmModuleAsyncOptions;
+      },
     }),
-    WinstonModule.forRoot({
-      ...loggerOption,
+    // logger
+    WinstonModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: async (configServer: ConfigService) => {
+        const logConfig = configServer.get('Log');
+
+        const transport = new winston.transports.DailyRotateFile({
+          level: 'error',
+          filename: logConfig.LogFileName,
+          dirname: logConfig.LogSavePath,
+          datePattern: 'YY-MM-DD',
+          maxSize: logConfig.MaxSize,
+          maxFiles: logConfig.MaxFiles,
+        });
+
+        return {
+          exitOnError: false,
+          format: format.combine(
+            format.timestamp({ format: 'YY-MM-DD hh:mm:ss A' }),
+            format.json(),
+            format.prettyPrint(),
+          ),
+          transports: [transport],
+        };
+      },
     }),
   ],
   controllers: [AppController],
