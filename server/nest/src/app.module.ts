@@ -7,9 +7,8 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptorInterceptor } from './interceptors/response-interceptor.interceptor';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { WinstonModule } from 'nest-winston';
-import * as winston from 'winston';
 import { AllExceptionFilter } from './filters/all-exception.filter';
-const format = winston.format;
+import { loggerOption } from './config/logger.config';
 
 @Module({
   imports: [
@@ -26,19 +25,7 @@ const format = winston.format;
       synchronize: false,
     }),
     WinstonModule.forRoot({
-      exitOnError: false,
-      format: format.combine(
-        format.timestamp({ format: 'YY-MM-DD hh:mm:ss A' }),
-        format.json(),
-        format.prettyPrint(),
-      ),
-      transports: [
-        new winston.transports.File({
-          level: 'error',
-          filename: 'app.log',
-          dirname: 'src/storage/logs',
-        }),
-      ],
+      ...loggerOption,
     }),
   ],
   controllers: [AppController],
