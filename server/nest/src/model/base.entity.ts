@@ -1,4 +1,4 @@
-import { Column } from 'typeorm';
+import { Column, UpdateDateColumn } from 'typeorm';
 
 export abstract class BaseEntity {
   @Column('tinyint')
@@ -14,6 +14,7 @@ export abstract class BaseEntity {
   created_by: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
+  @UpdateDateColumn()
   modified_on: Date;
 
   @Column()

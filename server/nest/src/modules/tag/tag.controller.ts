@@ -46,8 +46,16 @@ export class TagController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateTagDto: UpdateTagDto) {
-    return this.tagService.update(+id, updateTagDto);
+  async update(@Param('id') id: string, @Body() updateTagDto: UpdateTagDto) {
+    const res = await this.tagService.update(+id, updateTagDto);
+    if (res.affected) {
+      return null;
+    }
+
+    throw new HttpException(
+      'update tag error',
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
   }
 
   @Delete(':id')

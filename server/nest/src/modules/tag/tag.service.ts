@@ -34,7 +34,7 @@ export class TagService {
   }
 
   update(id: number, updateTagDto: UpdateTagDto) {
-    return `This action updates a #${id} tag`;
+    return this.tagRepository.update(id, updateTagDto);
   }
 
   remove(id: number) {
