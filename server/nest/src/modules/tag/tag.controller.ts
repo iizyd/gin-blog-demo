@@ -3,6 +3,8 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
+  HttpStatus,
   Param,
   Post,
   Put,
@@ -20,8 +22,15 @@ export class TagController {
   constructor(private readonly tagService: TagService) {}
 
   @Post()
-  create(@Body() createTagDto: CreateTagDto) {
-    return this.tagService.create(createTagDto);
+  async create(@Body() createTagDto: CreateTagDto) {
+    if (await this.tagService.create(createTagDto)) {
+      return null;
+    }
+
+    throw new HttpException(
+      'create tag error',
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
   }
 
   @Get()

@@ -11,8 +11,8 @@ import { Pager } from '../../decorators/pager.decorator';
 export class TagService {
   constructor(@InjectRepository(Tag) private tagRepository: Repository<Tag>) {}
 
-  create(createTagDto: CreateTagDto) {
-    return 'This action adds a new tag';
+  async create(createTagDto: CreateTagDto) {
+    return await this.tagRepository.save(createTagDto);
   }
 
   async findAll(listTagDto: ListTagDto, pager: Pager) {
