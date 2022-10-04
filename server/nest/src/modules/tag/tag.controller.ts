@@ -37,6 +37,7 @@ export class TagController {
   async findAll(@Query() listTagDto: ListTagDto, @Pager() pager: Pager) {
     const list = await this.tagService.findAll(listTagDto, pager);
     const total = await this.tagService.count(listTagDto);
+
     return ResponseList(list, pager, total);
   }
 
