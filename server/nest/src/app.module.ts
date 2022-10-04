@@ -9,6 +9,7 @@ import { HttpExceptionFilter } from './filters/http-exception.filter';
 import { WinstonModule } from 'nest-winston';
 import { AllExceptionFilter } from './filters/all-exception.filter';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ArticlesModule } from './modules/articles/articles.module';
 import config from './config/config';
 import * as winston from 'winston';
 import 'winston-daily-rotate-file';
@@ -65,6 +66,7 @@ const format = winston.format;
         };
       },
     }),
+    ArticlesModule,
   ],
   controllers: [AppController],
   providers: [

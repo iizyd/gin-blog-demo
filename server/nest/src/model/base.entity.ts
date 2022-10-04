@@ -11,14 +11,14 @@ export abstract class BaseEntity {
   created_on: Date;
 
   @Column()
-  created_by: string;
+  created_by?: string;
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   @UpdateDateColumn()
   modified_on: Date;
 
   @Column()
-  modified_by: string;
+  modified_by?: string;
 
   @Column({ type: 'datetime' })
   deleted_on: Date;
