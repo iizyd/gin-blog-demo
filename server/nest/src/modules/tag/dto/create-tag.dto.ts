@@ -10,4 +10,10 @@ export class CreateTagDto extends BaseDto {
   @IsOptional()
   @Type(() => Number)
   state = 0;
+
+  @IsOptional()
+  created_by = '';
+
+  @IsOptional()
+  modified_by = '';
 }

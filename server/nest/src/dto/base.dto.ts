@@ -6,10 +6,4 @@ export class BaseDto {
   @IsOptional({})
   @Type(() => Number)
   is_del = 0;
-
-  @IsOptional()
-  created_by = '';
-
-  @IsOptional()
-  modified_by = '';
 }

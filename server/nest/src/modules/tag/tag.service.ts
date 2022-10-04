@@ -38,6 +38,6 @@ export class TagService {
   }
 
   remove(id: number) {
-    return `This action removes a #${id} tag`;
+    return this.tagRepository.delete(id);
   }
 }

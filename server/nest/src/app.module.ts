@@ -35,6 +35,7 @@ const format = winston.format;
           entityPrefix: dbConfig.TablePrefix,
           entities: [__dirname + '/**/*/entities/*{.ts,.js}'],
           synchronize: false,
+          logging: true,
         } as TypeOrmModuleAsyncOptions;
       },
     }),

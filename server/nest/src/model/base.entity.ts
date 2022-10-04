@@ -1,4 +1,4 @@
-import { Column, UpdateDateColumn } from 'typeorm';
+import { Column, DeleteDateColumn, UpdateDateColumn } from 'typeorm';
 
 export abstract class BaseEntity {
   @Column('tinyint')

@@ -17,7 +17,7 @@ import { Pager } from '../../decorators/pager.decorator';
 import { ListTagDto } from './dto/list-tag.dto';
 import { ResponseList } from '../../core/app';
 
-@Controller('tag')
+@Controller('tags')
 export class TagController {
   constructor(private readonly tagService: TagService) {}
 
@@ -60,7 +60,15 @@ export class TagController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.tagService.remove(+id);
+  async remove(@Param('id') id: string) {
+    const res = await this.tagService.remove(+id);
+    if (res.affected) {
+      return null;
+    }
+
+    throw new HttpException(
+      'delete tag error',
+      HttpStatus.INTERNAL_SERVER_ERROR,
+    );
   }
 }
