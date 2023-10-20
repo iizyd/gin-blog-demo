@@ -1,7 +1,13 @@
 package main
 
-import "backend-go/internal/app"
+import (
+	"backend-go/internal/pkg/config"
+)
+
+var conf config.Conf
 
 func main() {
-	app.InitRouter()
+	// app.InitRouter()
+
+	conf.GetConf()
 }
