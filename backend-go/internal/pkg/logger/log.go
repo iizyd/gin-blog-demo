@@ -1,6 +1,7 @@
 package logger
 
 import (
+	"backend-go/internal/pkg/config"
 	"fmt"
 	"os"
 	"path"
@@ -32,10 +33,10 @@ func getEncoder() zapcore.Encoder {
 
 func getLogWriter() zapcore.WriteSyncer {
 	rootPath, _ := os.Getwd()
-	dir := path.Join(rootPath, "/log")
+	dir := path.Join(rootPath, config.Config.App.LogSavePath)
 	if _, err := os.Stat(dir); os.IsNotExist(err) {
 		// 目录不存在，创建目录
-		err := os.Mkdir(dir, 0755)
+		err := os.MkdirAll(dir, 0755)
 		if err != nil {
 			fmt.Println("无法创建目录:", err)
 			os.Exit(1)
@@ -43,7 +44,7 @@ func getLogWriter() zapcore.WriteSyncer {
 	}
 
 	lumberJackLogger := &lumberjack.Logger{
-		Filename:   path.Join(dir, "/test.log"),
+		Filename:   path.Join(dir, config.Config.App.LogFileName),
 		MaxSize:    10,
 		MaxBackups: 5,
 		MaxAge:     30,
