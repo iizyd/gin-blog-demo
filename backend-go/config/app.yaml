@@ -6,11 +6,8 @@ server:
 app:
   default_page_size: 10
   max_page_size: 100
-  log_save_path: storage/logs
-  log_file_name: app
-  log_file_ext: .log
-  upload_save_path: storage/uploads
-  upload_server_url: http://127.0.0.1:8000/static
+  upload_save_path: uploads
+  upload_server_url: http://127.0.0.1:9000/file
   upload_image_max_size: 5 # MB
   upload_image_allow_exts:
     - .jpg

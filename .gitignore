@@ -6,6 +6,8 @@
 *.dylib
 
 tmp
+log
+uploads
 
 # Test binary, built with `go test -c`
 *.test
