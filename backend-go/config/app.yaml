@@ -1,33 +1,28 @@
-Server:
-  RunMode: debug
-  HttpPort: 8000
-  ReadTimeout: 60
-  WriteTimeout: 60
-App:
-  DefaultPageSize: 10
-  MaxPageSize: 100
-  LogSavePath: storage/logs
-  LogFileName: app
-  LogFileExt: .log
-  UploadSavePath: storage/uploads
-  UploadServerUrl: http://127.0.0.1:8000/static
-  UploadImageMaxSize: 5 # MB
-  UploadImageAllowExts:
+server:
+  run_mode: debug
+  http_port: :9000
+  read_timeout: 60
+  write_timeout: 60
+app:
+  default_page_size: 10
+  max_page_size: 100
+  log_save_path: storage/logs
+  log_file_name: app
+  log_file_ext: .log
+  upload_save_path: storage/uploads
+  upload_server_url: http://127.0.0.1:8000/static
+  upload_image_max_size: 5 # MB
+  upload_image_allow_exts:
     - .jpg
     - .jpeg
     - .png
 database:
-  DBType: mysql
   username: root # 填写你的数据库账号
-  password: 123456 # 填写你的数据库密码
-  Host: 127.0.0.1:3306
-  DBName: xigua_blog
-  Charset: utf8
-  ParseTime: True
-  MaxIdleConns: 10
-  MaxOpenConns: 30
+  password: 12345678 # 填写你的数据库密码
+  host: 127.0.0.1:3306
+  db_name: express_blog
 
-JWT:
-  Secret: zz
-  Issuer: xigua-blog
-  Expire: 7200
+jwt:
+  secret: blog-demo
+  issuer: blog-demo
+  expire: 6 # hours

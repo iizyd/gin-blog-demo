@@ -1,13 +1,14 @@
 package main
 
 import (
+	"backend-go/internal/app"
 	"backend-go/internal/pkg/config"
+	"backend-go/internal/pkg/db"
 )
 
-var conf config.Conf
-
 func main() {
-	// app.InitRouter()
+	config.InitConf()
+	db.InitDB()
 
-	conf.GetConf()
+	app.InitRouter()
 }
