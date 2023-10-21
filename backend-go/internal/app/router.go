@@ -28,6 +28,7 @@ func InitRouter() {
 	upload(api)
 	userMgt(api)
 	tagMgt(api)
+	articleMgt(api)
 
 	r.Run(config.Config.Server.HttpPort)
 }
@@ -37,11 +38,29 @@ func userMgt(api *gin.RouterGroup) {
 }
 
 func upload(api *gin.RouterGroup) {
-	api.POST("/upload", handlers.Upload)
+	u := api.Group("/upload", middleware.JWTAuthMiddleware())
+	u.POST("", handlers.Upload)
 }
 
 func tagMgt(api *gin.RouterGroup) {
 	t := api.Group("/tag", middleware.JWTAuthMiddleware())
+	// t := api.Group("/tag")
 
 	t.GET("", handlers.GetAllTags)
+	t.GET("/:id", handlers.GetTag)
+	t.POST("", handlers.CreateTag)
+	t.DELETE("/:id", handlers.DeleteTag)
+	t.PUT("/:id", handlers.UpdateTag)
+}
+
+func articleMgt(api *gin.RouterGroup) {
+	t := api.Group("/tag", middleware.JWTAuthMiddleware())
+	// t := api.Group("/article")
+
+	t.GET("", handlers.GetAllArticles)
+	t.GET("/:id", handlers.GetArticleById)
+	t.POST("", handlers.CreateArticle)
+	t.DELETE("/:id", handlers.DeleteArticle)
+	t.PUT("/:id", handlers.UpdateArticle)
+	t.GET("/published", handlers.GetAllPublishedArticle)
 }

@@ -6,7 +6,7 @@ import (
 )
 
 func BindAndValid(c *gin.Context, param any) error {
-	if err := c.ShouldBind(&param); err != nil {
+	if err := c.ShouldBind(param); err != nil {
 		return err
 	}
 

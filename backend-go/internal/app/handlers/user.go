@@ -21,7 +21,7 @@ type LoginRes struct {
 func Login(c *gin.Context) {
 	loginReq := LoginReq{}
 	if err := bind.BindAndValid(c, &loginReq); err != nil {
-		resp.Resp(c, 200, err.Error(), nil, 0)
+		resp.Resp(c, 200, "参数校验错误"+err.Error(), nil, 0)
 		return
 	}
 
