@@ -1,71 +1,48 @@
-<h1 align='center' >xigua-blog</h1>
-
 ## 项目简介
 
-基于 Go、Nestjs 和 Vue3 实现的简易博客系统，可作为 Go、Vue3、Nestjs、TS 的练习项目。
+用 go(gin) 实现了一个简单的博客后台 demo，实现了登录、标签管理、文章管理、文件上传等功能
 
-## 预览地址
-
-开发 ing
+对应的前端项目地址 https://github.com/iizyd/express-blog ，项目内含后台管理前端和博客前端
 
 ## 技术栈
 
-- Go
-  - gin
-  - gorm
-  - jwt-go
-  - viper
-  - swag
-  - lumberjack
-- Vue3
-  - naive-ui
-  - axios
-  - vue-router
-  - vite
-  - ts
-- MySQL
+- Web框架 `gin`
+- 参数校验 `govalidator` 
+- 数据库 `gorm`、`mysql`
+- 鉴权 `jwt-go` 
+- 配置读取 `yaml.v3`
+- 日志 `zap`、`lumberjack`
 
 ## 开发计划
 
-### Go 版本后台
-
-- [x] 后台管理系统文章管理
-- [x] 后台管理系统标签管理
-- [x] 图片上传
-- [x] 登录
-- [ ] 博客前端接口
-
-### Nestjs 版本后台
-
-- [ ] 后台管理系统文章管理
-- [ ] 后台管理系统标签管理
-- [ ] 图片上传
-- [ ] 登录
-- [ ] 博客前端接口
-
-### Vue3 管理系统前端
-
-- [x] 管理系统登录
+- [x] 日志记录
+- [x] 配置读取
+- [x] 参数校验
+- [x] 文章管理
 - [x] 文章管理
 - [x] 标签管理
 - [x] 图片上传
-
-### Vue3 博客前端
-
-- [ ] 文章列表
-- [ ] 标签
-- [ ] 文章详情
+- [x] 登录
+- [x] 博客前端接口
 
 ## 目录结构
 
 |  文件夹 | 描述  |
 |  :----:  | :----: |
-| server  | 后端代码 |
-| server/go | go 版本后端目录 |
-| server/xigua-blog-nest | nestjs 版本后端目录 |
-| frontend  | 前端代码 |
-| frontend/admin | 后台管理系统前端 |
+| backend-go  | 后端代码 |
+| v1.0.0-version | 旧版本 `go` 和 `nestjs` 代码 |
 
-## 感谢
+## 截图
+![blog-1](https://raw.githubusercontent.com/iizyd/express-blog/main/pic/blog-1.png)
 
-- [煎鱼 - go 实战博客](https://golang2.eddycjy.com/)
+![blog-2](https://raw.githubusercontent.com/iizyd/express-blog/main/pic/blog-2.png)
+
+![blog-3](https://raw.githubusercontent.com/iizyd/express-blog/main/pic/blog-3.png)
+
+![frontend-1](https://raw.githubusercontent.com/iizyd/express-blog/main/pic/frontend-1.png)
+
+![frontend-2](https://raw.githubusercontent.com/iizyd/express-blog/main/pic/frontend-2.png)
+
+![frontend-3](https://raw.githubusercontent.com/iizyd/express-blog/main/pic/frontend-3.png)
+
+![frontend-4](https://raw.githubusercontent.com/iizyd/express-blog/main/pic/frontend-4.png)
