@@ -54,13 +54,13 @@ func tagMgt(api *gin.RouterGroup) {
 }
 
 func articleMgt(api *gin.RouterGroup) {
-	t := api.Group("/article", middleware.JWTAuthMiddleware())
+	t := api.Group("/article")
 	// t := api.Group("/article")
 
-	t.GET("", handlers.GetAllArticles)
+	t.GET("", middleware.JWTAuthMiddleware(), handlers.GetAllArticles)
 	t.GET("/:id", handlers.GetArticleById)
-	t.POST("", handlers.CreateArticle)
-	t.DELETE("/:id", handlers.DeleteArticle)
-	t.PUT("/:id", handlers.UpdateArticle)
+	t.POST("", middleware.JWTAuthMiddleware(), handlers.CreateArticle)
+	t.DELETE("/:id", middleware.JWTAuthMiddleware(), handlers.DeleteArticle)
+	t.PUT("/:id", middleware.JWTAuthMiddleware(), handlers.UpdateArticle)
 	t.GET("/published", handlers.GetAllPublishedArticle)
 }

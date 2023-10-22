@@ -5,8 +5,8 @@ import (
 )
 
 type BaseModel struct {
-	ID        uint            `gorm:"primaryKey" json:"id"`
-	CreatedAt *utils.LocalTime `json:"create_at"`
+	ID        uint             `gorm:"primaryKey" json:"id"`
+	CreatedAt *utils.LocalTime `json:"created_at"`
 }
 
 type Model struct {
