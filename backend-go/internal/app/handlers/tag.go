@@ -10,9 +10,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type GetAllTagsResp struct {
+	Data []model.Tag `json:"data"`
+}
+
 func GetAllTags(c *gin.Context) {
 	tag := model.GetTags()
-	resp.Resp(c, 200, "", tag, 0)
+	resp.Resp(c, 200, "", GetAllTagsResp{Data: tag}, 200)
 }
 
 func GetTag(c *gin.Context) {
@@ -29,7 +33,7 @@ func GetTag(c *gin.Context) {
 		return
 	}
 
-	resp.Resp(c, 200, "", tag, 0)
+	resp.Resp(c, 200, "", tag, 200)
 }
 
 type CreateTagReq struct {
@@ -50,7 +54,7 @@ func CreateTag(c *gin.Context) {
 		return
 	}
 
-	resp.Resp(c, 200, "", tag, 0)
+	resp.Resp(c, 200, "", tag, 200)
 }
 
 func UpdateTag(c *gin.Context) {
@@ -79,7 +83,7 @@ func UpdateTag(c *gin.Context) {
 		return
 	}
 
-	resp.Resp(c, 200, "", nil, 0)
+	resp.Resp(c, 200, "", nil, 200)
 }
 
 func DeleteTag(c *gin.Context) {
@@ -96,5 +100,5 @@ func DeleteTag(c *gin.Context) {
 		return
 	}
 
-	resp.Resp(c, 200, "", nil, 0)
+	resp.Resp(c, 200, "", nil, 200)
 }

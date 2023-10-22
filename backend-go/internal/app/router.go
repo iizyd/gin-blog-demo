@@ -16,7 +16,7 @@ func InitRouter() {
 
 	r.Use(cors.New(cors.Config{
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"},
-		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "Token"},
+		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "Token", "Authorization"},
 		AllowCredentials: false,
 		MaxAge:           12 * time.Hour,
 		AllowAllOrigins:  true,
@@ -54,7 +54,7 @@ func tagMgt(api *gin.RouterGroup) {
 }
 
 func articleMgt(api *gin.RouterGroup) {
-	t := api.Group("/tag", middleware.JWTAuthMiddleware())
+	t := api.Group("/article", middleware.JWTAuthMiddleware())
 	// t := api.Group("/article")
 
 	t.GET("", handlers.GetAllArticles)

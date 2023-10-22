@@ -3,7 +3,6 @@ package model
 import (
 	"backend-go/internal/pkg/db"
 	"backend-go/utils"
-	"fmt"
 	"time"
 )
 
@@ -115,8 +114,6 @@ func UpdateArticle(id int, title string, description string, content string, cov
 
 		db.DB.Model(&article).Association("Tag").Replace(existingTags)
 	}
-
-	fmt.Println(article)
 
 	res := db.DB.Model(&Article{}).Omit("created_at").Where("id = ?", article.ID).Preload("Tag").Save(&article)
 	return article, res.Error

@@ -15,6 +15,7 @@ type GetAllArticlesReq struct {
 	page.Page
 	Published bool `form:"published" json:"published"`
 }
+
 type GetAllResp struct {
 	Total int             `json:"total"`
 	Data  []model.Article `json:"data"`
@@ -23,7 +24,7 @@ type GetAllResp struct {
 func GetAllArticles(c *gin.Context) {
 	var query GetAllArticlesReq
 	if err := bind.BindAndValid(c, &query); err != nil {
-		resp.Resp(c, 200, err.Error(), nil, 0)
+		resp.Resp(c, 200, err.Error(), nil, 200)
 		return
 	}
 
@@ -33,7 +34,7 @@ func GetAllArticles(c *gin.Context) {
 	resp.Resp(c, 200, "", &GetAllResp{
 		Total: int(count),
 		Data:  articles,
-	}, 0)
+	}, 200)
 }
 
 func GetArticleById(c *gin.Context) {
@@ -41,20 +42,20 @@ func GetArticleById(c *gin.Context) {
 
 	article := model.GetArticleById(id)
 	if article.ID == 0 {
-		resp.Resp(c, 200, "ID不存在", nil, 0)
+		resp.Resp(c, 200, "ID不存在", nil, 200)
 		return
 	}
 
-	resp.Resp(c, 200, "", article, 0)
+	resp.Resp(c, 200, "", article, 200)
 }
 
 type CreateArticleReq struct {
 	Title         string `json:"title" valid:"required~title必填"`
 	Description   string `json:"description" valid:"required~description必填"`
-	CoverImageUrl string `json:"cover_image_url" valid:"required~cover_image_url必填"`
-	Content       string `json:"content" valid:"required~content必填"`
+	CoverImageUrl string `json:"cover_image_url" valid:"-"`
+	Content       string `json:"content" valid:"-"`
 	Published     bool   `json:"published" valid:"-"`
-	Tags          []int  `json:"tags" valid:"required~标签数组必填"`
+	Tags          []int  `json:"tags" valid:"-"`
 }
 
 func CreateArticle(c *gin.Context) {
@@ -70,7 +71,7 @@ func CreateArticle(c *gin.Context) {
 		resp.Resp(c, 500, "文章创建失败：", nil, -1)
 		return
 	}
-	resp.Resp(c, 200, "", nil, 0)
+	resp.Resp(c, 200, "", nil, 200)
 }
 
 func UpdateArticle(c *gin.Context) {
@@ -93,7 +94,7 @@ func UpdateArticle(c *gin.Context) {
 		resp.Resp(c, 500, "文章修改失败：", nil, -1)
 		return
 	}
-	resp.Resp(c, 200, "", nil, 0)
+	resp.Resp(c, 200, "", nil, 200)
 }
 
 func DeleteArticle(c *gin.Context) {
@@ -110,13 +111,13 @@ func DeleteArticle(c *gin.Context) {
 		return
 	}
 
-	resp.Resp(c, 200, "", nil, 0)
+	resp.Resp(c, 200, "", nil, 200)
 }
 
 func GetAllPublishedArticle(c *gin.Context) {
 	var query GetAllArticlesReq
 	if err := bind.BindAndValid(c, &query); err != nil {
-		resp.Resp(c, 200, err.Error(), nil, 0)
+		resp.Resp(c, 200, err.Error(), nil, 200)
 		return
 	}
 
@@ -126,5 +127,5 @@ func GetAllPublishedArticle(c *gin.Context) {
 	resp.Resp(c, 200, "", &GetAllResp{
 		Total: int(count),
 		Data:  articles,
-	}, 0)
+	}, 200)
 }

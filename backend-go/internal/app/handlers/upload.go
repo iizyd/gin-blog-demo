@@ -14,7 +14,7 @@ import (
 )
 
 type UploadResp struct {
-	Url string
+	Url string `json:"url"`
 }
 
 func Upload(c *gin.Context) {
@@ -26,8 +26,9 @@ func Upload(c *gin.Context) {
 
 	fileType := utils.StrTo(c.PostForm("type")).MustInt()
 	if fileHeader == nil || fileType <= 0 {
-		resp.Resp(c, 400, "文件类型不支持,请修正type字段", nil, -1)
-		return
+		fileType = 1
+		// resp.Resp(c, 400, "文件类型不支持,请修正type字段", nil, -1)
+		// return
 	}
 
 	fileInfo, err := UploadFile(file_handle.FileType(fileType), file, fileHeader)
@@ -39,7 +40,7 @@ func Upload(c *gin.Context) {
 
 	resp.Resp(c, 200, "", &UploadResp{
 		Url: fileInfo.AccessUrl,
-	}, 0)
+	}, 200)
 }
 
 type FileInfo struct {

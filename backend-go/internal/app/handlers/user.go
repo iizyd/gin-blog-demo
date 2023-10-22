@@ -21,22 +21,22 @@ type LoginRes struct {
 func Login(c *gin.Context) {
 	loginReq := LoginReq{}
 	if err := bind.BindAndValid(c, &loginReq); err != nil {
-		resp.Resp(c, 200, "参数校验错误"+err.Error(), nil, 0)
+		resp.Resp(c, 200, "参数校验错误"+err.Error(), nil, 200)
 		return
 	}
 
 	user := model.GetUserById(loginReq.UserName)
 	if user.ID == 0 {
-		resp.Resp(c, 200, "用户名或密码错误", nil, 0)
+		resp.Resp(c, 200, "用户名或密码错误", nil, 200)
 		return
 	}
 
 	token, err := jwt.GenToken(user.UserName)
 	if err != nil {
-		resp.Resp(c, 200, err.Error(), nil, 0)
+		resp.Resp(c, 200, err.Error(), nil, 200)
 		return
 	}
 
 	c.Header("Authorization", fmt.Sprintf("Bearer %s", token))
-	resp.Resp(c, 200, "", LoginRes{Token: token}, 0)
+	resp.Resp(c, 200, "", LoginRes{Token: token}, 200)
 }
