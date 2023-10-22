@@ -1,8 +1,8 @@
 package global
 
 import (
-	"github.com/iamzhiyudong/xigua-blog/pkg/logger"
-	"github.com/iamzhiyudong/xigua-blog/pkg/setting"
+	"github.com/iizyd/xigua-blog/pkg/logger"
+	"github.com/iizyd/xigua-blog/pkg/setting"
 )
 
 var (

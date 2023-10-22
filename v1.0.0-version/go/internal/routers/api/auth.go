@@ -2,10 +2,10 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/internal/service"
-	"github.com/iamzhiyudong/xigua-blog/pkg/app"
-	"github.com/iamzhiyudong/xigua-blog/pkg/errcode"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/internal/service"
+	"github.com/iizyd/xigua-blog/pkg/app"
+	"github.com/iizyd/xigua-blog/pkg/errcode"
 )
 
 func GetAuth(c *gin.Context) {

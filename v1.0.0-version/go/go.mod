@@ -1,4 +1,4 @@
-module github.com/iamzhiyudong/xigua-blog
+module github.com/iizyd/xigua-blog
 
 go 1.18
 

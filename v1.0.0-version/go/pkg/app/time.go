@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/iamzhiyudong/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/global"
 )
 
 type LocalTime time.Time

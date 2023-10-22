@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/pkg/app"
-	"github.com/iamzhiyudong/xigua-blog/pkg/setting"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/pkg/app"
+	"github.com/iizyd/xigua-blog/pkg/setting"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )

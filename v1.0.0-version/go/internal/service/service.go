@@ -3,8 +3,8 @@ package service
 import (
 	"context"
 
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/internal/dao"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/internal/dao"
 )
 
 type Service struct {

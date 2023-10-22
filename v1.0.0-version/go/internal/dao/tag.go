@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"github.com/iamzhiyudong/xigua-blog/internal/model"
-	"github.com/iamzhiyudong/xigua-blog/pkg/app"
+	"github.com/iizyd/xigua-blog/internal/model"
+	"github.com/iizyd/xigua-blog/pkg/app"
 )
 
 func (d *Dao) CountTag(name string, state int) (int, error) {

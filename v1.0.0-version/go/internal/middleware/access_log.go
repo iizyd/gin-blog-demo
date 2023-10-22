@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/pkg/logger"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/pkg/logger"
 )
 
 type AccessLogWriter struct {

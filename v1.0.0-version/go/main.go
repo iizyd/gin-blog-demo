@@ -6,11 +6,11 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/internal/model"
-	"github.com/iamzhiyudong/xigua-blog/internal/routers"
-	"github.com/iamzhiyudong/xigua-blog/pkg/logger"
-	"github.com/iamzhiyudong/xigua-blog/pkg/setting"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/internal/model"
+	"github.com/iizyd/xigua-blog/internal/routers"
+	"github.com/iizyd/xigua-blog/pkg/logger"
+	"github.com/iizyd/xigua-blog/pkg/setting"
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 

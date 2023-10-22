@@ -5,8 +5,8 @@ import (
 	"mime/multipart"
 	"os"
 
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/pkg/upload"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/pkg/upload"
 )
 
 type FileInfo struct {

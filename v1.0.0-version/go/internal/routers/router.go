@@ -5,13 +5,13 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/internal/middleware"
-	"github.com/iamzhiyudong/xigua-blog/internal/routers/api"
-	v1 "github.com/iamzhiyudong/xigua-blog/internal/routers/api/v1"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/internal/middleware"
+	"github.com/iizyd/xigua-blog/internal/routers/api"
+	v1 "github.com/iizyd/xigua-blog/internal/routers/api/v1"
 
 	"github.com/gin-contrib/cors"
-	_ "github.com/iamzhiyudong/xigua-blog/docs"
+	_ "github.com/iizyd/xigua-blog/docs"
 	ginSwagger "github.com/swaggo/gin-swagger"
 	"github.com/swaggo/gin-swagger/swaggerFiles"
 )

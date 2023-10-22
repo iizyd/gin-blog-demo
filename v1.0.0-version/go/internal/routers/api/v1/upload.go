@@ -2,12 +2,12 @@ package v1
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/internal/service"
-	"github.com/iamzhiyudong/xigua-blog/pkg/app"
-	"github.com/iamzhiyudong/xigua-blog/pkg/convert"
-	"github.com/iamzhiyudong/xigua-blog/pkg/errcode"
-	"github.com/iamzhiyudong/xigua-blog/pkg/upload"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/internal/service"
+	"github.com/iizyd/xigua-blog/pkg/app"
+	"github.com/iizyd/xigua-blog/pkg/convert"
+	"github.com/iizyd/xigua-blog/pkg/errcode"
+	"github.com/iizyd/xigua-blog/pkg/upload"
 )
 
 type Upload struct{}

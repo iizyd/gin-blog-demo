@@ -1,8 +1,8 @@
 package dao
 
 import (
-	"github.com/iamzhiyudong/xigua-blog/internal/model"
-	"github.com/iamzhiyudong/xigua-blog/pkg/app"
+	"github.com/iizyd/xigua-blog/internal/model"
+	"github.com/iizyd/xigua-blog/pkg/app"
 )
 
 func (dao *Dao) CreateArticle(title string, desc string, cover_image_url string, content string, createdBy string, state int, tag []int) error {

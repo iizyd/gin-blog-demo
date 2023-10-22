@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/iamzhiyudong/xigua-blog/pkg/errcode"
+	"github.com/iizyd/xigua-blog/pkg/errcode"
 )
 
 type Response struct {

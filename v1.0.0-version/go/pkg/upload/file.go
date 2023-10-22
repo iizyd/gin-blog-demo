@@ -8,8 +8,8 @@ import (
 	"path"
 	"strings"
 
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/pkg/util"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/pkg/util"
 )
 
 type FileType int

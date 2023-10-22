@@ -2,8 +2,8 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/iamzhiyudong/xigua-blog/global"
-	"github.com/iamzhiyudong/xigua-blog/pkg/convert"
+	"github.com/iizyd/xigua-blog/global"
+	"github.com/iizyd/xigua-blog/pkg/convert"
 )
 
 func GetPage(c *gin.Context) int {
